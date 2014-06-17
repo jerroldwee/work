@@ -1,0 +1,49 @@
+<div class="grid-auto motto">
+  <div class="unit-2-5">
+    <h2>Fancy eyewear does not come in fancy prices.</h2>
+  </div>
+</div>
+
+<div class="grid-auto">
+  <div class="unit-2-5">
+    <ul class="browse">
+      <li><a href="/products/men">Shop Men</a></li>
+      <li><a href="/products/women">Shop Women</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="grid-auto highlight">
+  <div class="unit-1-3">
+    <div class="boxy">
+      <%= image_tag("highlight_spec.jpg") %>
+      <h4><%= link_to "Browse our collections", products_path %></h4>
+    </div>
+  </div>
+  <div class="unit-1-3">
+    <div class="boxy">
+      <%= image_tag("highlight_collection.jpg") %>
+      <h4><%= link_to "Virtual Try On", visual_try_on_users_path %></h4>
+    </div>
+  </div>
+  <div class="unit-1-3">
+    <div class="boxy">
+      <%= image_tag("highlight_location.jpg") %>
+      <h4><%= link_to "Find Location NEAR You", "/contactus" %></h4>
+    </div>
+  </div>
+</div>
+
+<div class="grid-auto banner">
+  <div class="unit-2-3">
+    <div class="boxed banner">
+      <%= image_tag "frontpage_banner.jpg" %>
+      <h4>Frames and lenses start at $88.</h4>
+    </div>
+  </div>
+  <div class="unit-1-3">
+    <div class="boxed banner">
+      <%= link_to image_tag("freedelivery.png"), "/apps" %>
+    </div>
+  </div>
+</div>

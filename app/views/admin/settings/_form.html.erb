@@ -1,0 +1,28 @@
+<%= form_for(@entry.new_record? ? @entry : @entry , :url => @entry.new_record? ? admin_settings_path(@entry) : admin_setting_path(@entry), :as => :entry, :html => {:class => "simple-form simple-form-stacked", :method => @entry.new_record? ? :post : :put }) do |f| %>
+  <% if @entry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this from being saved:</h2>
+
+      <ul>
+      <% @entry.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <legend>Fill in the content below</legend>
+
+    <%= f.label :name %>
+    <%= f.text_field :name, :class => "simple-input-2-3" %>
+  
+    <%= hidden_field_tag :type, params[:type] %>
+    <br/>
+    <%= f.submit "Save Data", :class => "simple-button simple-button-primary button-positive" %>
+
+  </fieldset>
+
+<% end %>
+
+

@@ -1,0 +1,106 @@
+<form class="simple-form" action="/carts/payment" method="post">
+  <div class="grid container">
+
+    <% @total = 0 %>    
+    <div class='line-items'>
+      <%= render :partial => 'carts/cart_items.html.erb' %>
+    </div>
+  </div>
+  <div class"grid-auto">
+    <div class="unit-1-1">
+      <div class="delivery-cost-info">
+        Delivery Cost: <%= @order.delivery_info %> x <%= @order.delivery_quantity %> = $ <%= @order.delivery_quantity * @order.delivery_amount %>
+      </div>
+      <div class="delivery-info">
+        <%= @order.full_name %> <br/>
+        <%= @order.address_line_1 %> <br/>
+        <%= @order.address_line_2 %> <br/>
+        <%= @order.address_line_3 %> <br/>
+        <%= @order.region %> <%= @order.state %> <br/>
+        <%= @order.country %> <%= @order.postal_code %> <br/>
+        <%= @order.contact_no %> <%= @order.email %><br/>
+      </div>
+    </div>
+    <hr class="blue"/>
+  </div>
+  <div class="grid-auto container" style="margin-top: -30px;">
+    <!-- line-items summary -->
+    <div class="unit-3-5">
+      <div class="product-credit">
+        <div class="credit">Apply Credit: <%= @order.discount_credit %></div>
+        <div class="info">Maximum 50 credits per purchase, 1 credit = $0.5 discount</div>
+      </div>
+    </div>
+    <div class="unit-2-5">
+      <div class="product-summary">
+        <table style="width:100%">
+          <tr class="subtotal">
+            <td>Subtotal:</td>
+            <td class="amount subtotal-amount">$ <%= "%.2f" %  @total %></td>
+          </tr>
+          <tr class="subtotal">
+            <td>Delivery:</td>
+            <td class="amount delivery-amount">$ <%= @order.delivery_quantity * @order.delivery_amount %></td>
+          </tr>
+          <% @total += @order.delivery_quantity * @order.delivery_amount %>
+          <% if current_user %>
+          <tr>
+            <td>Discount:</td>
+            <% max_discount = [@total, (@order.discount_credit * 0.5)].min %>
+            <td class="amount discount-amount" discount="<%= max_discount %>">$ <%= (max_discount) %></td>
+            <% @total -= max_discount %>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+    <div class="unit-1-5">
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />   
+    </div>
+   <hr class="blue"/>
+    <div class="unit-3-5"></div>
+    <div class="unit-2-5">
+      <div class="product-summary">
+        <table style="width:100%">
+          <tr class="subtotal">
+            <td>Total:</td>
+            <td class="amount total-amount">$ <%= "%.2f" % @total %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="unit-1-5"></div>
+  </div>
+  <div class="grid-auto" style="padding-top: 30px">
+    <div class="unit-1-2">
+      <div class="payment-methods">
+        <h4>Payment Methods:</h4>
+        <input type="hidden" name="id" value="<%= @order.checkout_token %>" />
+        <% unless @order.country == "Singapore" %>
+        <input type="radio" value="paypal" name="payment_type" checked="checked"/> Paypal (For online purchase, Paypal support credit card as well) <br/>
+        <% end %>
+        <input type="radio" value="cash" name="payment_type"<%= (@order.country == "Singapore") ? "checked=\"checked\"" : nil %>/> Cash (Only for store visit purchase)
+      </div>
+    </div>
+    <div class="unit-1-4">
+      &nbsp;
+    </div>
+    <div class="unit-1-4" >
+      <% if @order.country == "Singapore" %>
+        <input type="submit" name="action" value="Confirm" style="border : 0px none; float : right; width : 130px" class="blue-button"/>
+      <% else %>
+        <input type="submit" name="action" value="Make Payment" style="border : 0px none; float : right; width : 130px" class="blue-button"/>
+      <% end %>
+    </div>
+    <% if @order.country == "Singapore" %>
+    <div class="line-items additional-text" style="height : 40px">
+      According to Singapore's Code of Professional Conduct and Professional Practice Guidelines for Optometrists & Opticians (Section 2.2, Page 15), all prescription eye glasses have to be dispensed over the counter after the patient has been examined by a certified Optician.
+    </div>
+    <div class="line-items additional-text">
+      Please visit our store to allow our Opticians to assist you in selecting the most appropriate frame & lenses for your eyes. Hope to see you soon!
+    </div>
+    <% end %>
+  </div>
+
+
+</form>

@@ -1,0 +1,157 @@
+<form class="simple-form" action="/carts/save" method="post" enctype="multipart/form-data">
+  <div class="grid container">
+    <div class="unit-1-1"type="text" >
+
+    <% @total = 0 %>
+    <%= render :partial => 'carts/cart_items.html.erb' %>
+    <% @entry = @entries.first %>
+    <% @entry_meta = @entry ? @entry : LineItem.new %>
+    <% @entry_prefix = @entry ? "entry[#{@entry.no}][info]" : "" %>
+  </div>
+  
+  <% if @entry.lens.try(:name) != "No Lens" %>
+
+  <div class="grid-auto container">
+    <div class="unit-1-1">
+      <h3>Apply prescription to your lens</h3>
+    </div>
+  </div>
+
+  <div class="grid-auto container">
+    <div class="unit-1-2 entry">
+      <label><input type="radio" checked="checked" name="<%= @entry_prefix %>[prescription_type]" value="with-prescription" <%= @entry_meta.meta("prescription_type") == "with-prescription" ? "checked='checked'" : '' %>/> Prescription (Rx)</label>
+    </div>
+    <div class="unit-1-2 entry right">
+      <label>
+        <% if current_user %>
+          Select your history prescription or create new entry:
+          <select name="prescription_id" jsclass="prescription-selector" inputname="<%= @entry_prefix %>">
+            <option value="0">Create New</option>
+            <% current_user.prescriptions.all.each do |p| %>
+              <option value="<%= p.id %>"><%= p.title %></option>
+            <% end %>
+          </select>
+        <% end %>
+      </label>
+    </div>
+    <div class="unit-1-2 entry">
+      <table cellpadding="0" cellspacing="0">
+        <tr>
+          <td colspan="4" class="header">Right (OD)</td>
+        </tr>
+        <tr>
+          <td>Distance</td>
+          <td>Sphere</td>
+          <td>Cylinder</td>
+          <td>Axis</td>
+        </tr>
+        <tr>
+          <td>Bifocal</td>
+          <td><input type="text" name="<%= @entry_prefix %>[prescription_right_bifocal_sphere]" value="<%= @entry_meta.meta("prescription_right_bifocal_sphere") %>" class="simple-input-1-2" /></td>
+          <td><input type="text" name="<%= @entry_prefix %>[prescription_right_bifocal_cylinder]" value="<%= @entry_meta.meta("prescription_right_bifocal_cylinder") %>" class="simple-input-1-2" /></td>
+          <td><input type="text" name="<%= @entry_prefix %>[prescription_right_bifocal_axis]" value="<%= @entry_meta.meta("prescription_right_bifocal_axis") %>" class="simple-input-1-2" /></td>
+        </tr>
+        <tr>
+          <td>Reading</td>
+          <td><input type="text" name="<%= @entry_prefix %>[prescription_right_reading_sphere]" value="<%= @entry_meta.meta("prescription_right_reading_sphere") %>" class="simple-input-1-2" /></td>
+          <td><input type="text" name="<%= @entry_prefix %>[prescription_right_reading_cylinder]" value="<%= @entry_meta.meta("prescription_right_reading_cylinder") %>" class="simple-input-1-2" /></td>
+          <td><input type="text" name="<%= @entry_prefix %>[prescription_right_reading_axis]" value="<%= @entry_meta.meta("prescription_right_reading_axis") %>" class="simple-input-1-2" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="unit-1-2 entry">
+      <table cellpadding="0" cellspacing="0">
+        <tr>
+          <td colspan="4" class="header">Left (OD)</td>
+        </tr>
+        <tr>
+          <td>Distance</td>
+          <td>Sphere</td> 
+          <td>Cylinder</td>
+          <td>Axis</td>
+        </tr>
+        <tr>
+          <td>Bifocal</td>
+          <td><input type="text" name="<%= @entry_prefix %>[prescription_left_bifocal_sphere]" value="<%= @entry_meta.meta("prescription_left_bifocal_sphere") %>" class="simple-input-1-2" /></td>
+          <td><input type="text" name="<%= @entry_prefix %>[prescription_left_bifocal_cylinder]" value="<%= @entry_meta.meta("prescription_left_bifocal_cylinder") %>" class="simple-input-1-2" /></td>
+          <td><input type="text" name="<%= @entry_prefix %>[prescription_left_bifocal_axis]" value="<%= @entry_meta.meta("prescription_left_bifocal_axis") %>" class="simple-input-1-2" /></td>
+        </tr>
+        <tr>
+          <td>Reading</td>
+          <td><input type="text" name="<%= @entry_prefix %>[prescription_left_reading_sphere]" value="<%= @entry_meta.meta("prescription_left_reading_sphere") %>" class="simple-input-1-2" /></td>
+          <td><input type="text" name="<%= @entry_prefix %>[prescription_left_reading_cylinder]" value="<%= @entry_meta.meta("prescription_left_reading_cylinder") %>" class="simple-input-1-2" /></td>
+          <td><input type="text" name="<%= @entry_prefix %>[prescription_left_reading_axis]" value="<%= @entry_meta.meta("prescription_left_reading_axis") %>" class="simple-input-1-2" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="unit-1-4">
+      <br/>
+      <label>F.P.D:</label>
+      <input type="text" name="<%= @entry_prefix %>[prescription_fpd]" value="<%= @entry_meta.meta("prescription_fpd") %>" class="simple-input-1-2" />
+    </div>
+    <div class="unit-1-4">
+      <br/>
+      <label>N.P.D:</label>
+      <input type="text" name="<%= @entry_prefix %>[prescription_npd]" value="<%= @entry_meta.meta("prescription_npd") %>" class="simple-input-1-2" />
+    </div>
+    <div class="unit-1-4">
+      <br/>
+      <label>Segment H:</label>
+      <input type="text" name="<%= @entry_prefix %>[prescription_segment_h]" value="<%= @entry_meta.meta("prescription_segment_h") %>" class="simple-input-1-2" />
+    </div>
+    <div class="unit-1-8">
+      <br/>
+      <label>m/m up:</label>
+      <input type="text" name="<%= @entry_prefix %>[prescription_mm_up]" value="<%= @entry_meta.meta("prescription_mm_up") %>" class="simple-input-1-2"/>
+    </div>
+    <div class="unit-1-8">
+      <br/>
+      <label>down:</label>
+      <input type="text" name="<%= @entry_prefix %>[prescription_mm_down]" value="<%= @entry_meta.meta("prescription_mm_down") %>" class="simple-input-1-2"/>
+    </div>
+    <div class="unit-1-1">
+      <hr class="blue"/>
+      <br/>
+      <% if current_user %>
+      <label>Prescription Title:</label>
+      <input type="text" name="<%= @entry_prefix %>[prescription_title]" class="prescription-title simple-input-1-2"/>
+      <% end %>
+    </div>
+    <hr class="blue"/>
+  </div>
+
+  <div class="grid-auto container">
+    <div class="unit-1-2 entry">
+      <input type="radio" name="<%= @entry_prefix %>[prescription_type]" value="no-prescription" <%= @entry_meta.meta("prescription_type") == "no-prescription" ? "checked='checked'" : '' %>/> <label>No Prescription</label><br/><span>Choose the selection below if you just buying frame.</span>
+    </div>
+    <div class="unit-1-2 entry">
+      <input type="radio" name="<%= @entry_prefix %>[prescription_type]" value="upload-prescription" <%= @entry_meta.meta("prescription_type") == "upload-prescription" ? "checked='checked'" : '' %>/> <label>Upload Prescription</label><br/><span>If you have your prescription paper, just take a photo and upload it.</span><br/><br/>
+      <input type="file" name="upload" jsclass="upload-triggered"/>
+      <input type="hidden" name="<%= @entry ? "entry[#{@entry.no}]" : "xx" %>[attachment_guid]" : "" value="<%= @entry_meta.attachment_guid %>" />
+      <% if @entry && @entry.attachment && @entry.attachment.upload.exists? %>
+        <div style='padding-top : 20px; color : #59f'>
+          <em class='upload-status'>Uploaded <%= @entry.attachment.upload_file_name %></em>
+        </div>
+      <% end %>
+      <br/><br/>
+    </div>
+    <div class="unit-1-2 entry">
+      <input type="radio" name="<%= @entry_prefix %>[prescription_type]" value="dont-know-prescription" <%= @entry_meta.meta("prescription_type") == "dont-know-prescription" ? "checked=\"checked\"" : '' %> /> <label>Do not know</label><br/><span>Choose the selection below if you do not know your prescription.</span><br/><br/>
+    </div>
+    <hr class="blue"/>
+  </div>
+  
+  <% end %>
+
+  <div class="grid-auto" style="padding-top: 30px">
+    <div class="unit-1-2"></div>
+    <div class="unit-1-4">
+    </div>
+    <div class="unit-1-4">
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />      
+      <input type="submit" class="big-blue-button" value="Add"/>
+      <br/><br/>
+    </div>
+  </div>
+
+</form>

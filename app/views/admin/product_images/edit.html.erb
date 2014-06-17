@@ -1,0 +1,13 @@
+<div class="grid-auto">
+  <div class="unit-1">
+    <div class="box">
+      <%= render 'form' %>
+    </div>
+  </div>
+  <div class="unit-1">
+    <div class="box">
+      <%# link_to 'Show Details', admin_product_choice_product_image_url(@product, @choice, @entry), :class => "button" %>
+      <%= link_to 'Back to Choice', admin_product_choice_url(@product, @choice), :class => "button" %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  left: 1.5
+  top: 1.5
+  width: 1.5
+  height: 1.5
+  rotation: 1.5
+  temprary: false
+
+two:
+  left: 1.5
+  top: 1.5
+  width: 1.5
+  height: 1.5
+  rotation: 1.5
+  temprary: false

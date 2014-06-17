@@ -1,0 +1,2 @@
+module Api::WallHelper
+end

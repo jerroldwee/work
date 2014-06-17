@@ -1,0 +1,239 @@
+/*csslint adjoining-classes:false, outline-none:false*/
+/*TODO: Remove this lint rule override after a refactor of this code.*/
+
+/* pure:menu */
+
+.navigator ul {
+    position: absolute;
+    visibility: hidden;
+}
+
+.navigator.navigator-open {
+    visibility: visible;
+    z-index: 2;
+    width: 100%;
+}
+
+.navigator ul {
+    left: -10000px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    top: -10000px;
+    z-index: 1;
+}
+
+.navigator > ul { position: relative; }
+
+.navigator-open > ul {
+    left: 0;
+    top: 0;
+    visibility: visible;
+}
+
+.navigator-open > ul:focus {
+    outline: 0;
+}
+
+.navigator li { position: relative; }
+
+.navigator a,
+.navigator .navigator-heading {
+    display: block;
+    color: inherit;
+    line-height: 1.5em;
+    padding: 5px 20px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.navigator.navigator-horizontal > .navigator-heading {
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    margin: 0;
+    vertical-align: middle;
+}
+.navigator.navigator-horizontal > ul {
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    vertical-align: middle;
+    height: 2.4em;
+}
+
+.navigator li a { padding: 5px 20px; }
+
+.navigator-can-have-children > .navigator-label:after {
+    content: '\25B8';
+    float: right;
+    /* These specific fonts have the Unicode char we need. */
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'DejaVu Sans', sans-serif;
+    margin-right: -20px;
+    margin-top: -1px;
+}
+
+.navigator-can-have-children > .navigator-label {
+    padding-right: 30px;
+}
+
+.navigator-separator {
+    background-color: #dfdfdf;
+    display: block;
+    height: 1px;
+    font-size: 0;
+    margin: 7px 2px;
+    overflow: hidden;
+}
+
+.navigator-hidden {
+    display: none;
+}
+
+/* FIXED MENU */
+.navigator-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+
+/* HORIZONTAL MENU CODE */
+
+/* Initial menus should be inline-block so that they are horizontal */
+.navigator-horizontal li {
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    vertical-align: middle;
+}
+
+/* Submenus should still be display: block; */
+.navigator-horizontal li li {
+    display: block;
+}
+
+/* Content after should be down arrow */
+.navigator-horizontal > .navigator-children > .navigator-can-have-children > .navigator-label:after {
+    content: "\25BE";
+}
+/*Add extra padding to elements that have the arrow so that the hover looks nice */
+.navigator-horizontal > .navigator-children > .navigator-can-have-children > .navigator-label {
+    padding-right: 30px;
+}
+
+/* Adjusting separator for vertical menus */
+.navigator-horizontal li.navigator-separator {
+	height: 50%;
+	width: 1px;
+	margin: 0 7px;
+}
+
+/* Submenus should be horizontal separator again */
+.navigator-horizontal li li.navigator-separator {
+	height: 1px;
+	width: auto;
+	margin: 7px 2px;
+}
+
+/* pure:menu-r */
+
+@media (max-width: 480px) {
+    .navigator-horizontal {
+        width: 100%;
+    }
+
+    .navigator-children li {
+        display: block;
+        border-bottom: 1px solid black;
+    }
+}
+
+
+/* pure:menu-styling */
+
+
+.navigator.navigator-open,
+.navigator.navigator-horizontal li .navigator-children {
+    background: #fff; /* Old browsers */
+    border: 1px solid #b7b7b7;
+}
+
+/* remove borders for horizontal menus */
+.navigator.navigator-horizontal,
+.navigator.navigator-horizontal .navigator-heading {
+    border: none;
+}
+
+
+/* LINK STYLES */
+
+.navigator a {
+    border: 1px solid transparent;
+    border-left: none;
+    border-right: none;
+
+}
+
+.navigator a,
+.navigator .navigator-can-have-children > li:after {
+    color: #777;
+}
+
+.navigator .navigator-can-have-children > li:hover:after {
+    color: #fff;
+}
+
+/* Focus style for a dropdown menu-item when the parent has been opened */
+.navigator .navigator-open {
+    background: #dedede;
+}
+
+
+.navigator li a:hover,
+.navigator li a:focus {
+    background: #eee;
+}
+
+/* DISABLED STATES */
+.navigator li.navigator-disabled a:hover,
+.navigator li.navigator-disabled a:focus {
+    background: #fff;
+    color: #bfbfbf;
+}
+
+.navigator .navigator-disabled > a {
+    background-image: none;
+    border-color: transparent;
+    cursor: default;
+}
+
+.navigator .navigator-disabled > a,
+.navigator .navigator-can-have-children.navigator-disabled > a:after {
+    color: #bfbfbf;
+}
+
+/* HEADINGS */
+.navigator .navigator-heading {
+    color: #565d64;
+    text-transform: uppercase;
+    font-size: 90%;
+    margin-top: 0.5em;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #dfdfdf;
+}
+
+/* ACTIVE MENU ITEM */
+.navigator .navigator-selected a {
+    color: #000;
+}
+
+/* FIXED MENU */
+.navigator.navigator-open.navigator-fixed {
+    border: none;
+    border-bottom: 1px solid #b7b7b7;
+}
+
+

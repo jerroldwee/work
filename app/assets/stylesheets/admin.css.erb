@@ -1,0 +1,224 @@
+/*
+ * This is a manifest file that'll be compiled into admin.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require base
+ *= require grid
+ *= require menu
+ *= require form
+ *= require button
+ *= require bar
+ *= require list
+ *= require pagination
+ *= require segmented
+ *= require count
+ *= require_self
+ */
+
+ body {
+  font: 14px/1.25 "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+ }
+
+ #layout {
+    padding-top: 28px;
+    padding-left: 150px; /* left col width "#menu" */
+    left: 0;
+}
+
+.bar-title {
+  margin-left: 150px; /* left col width "#menu" */
+}
+
+.box {
+  padding: 0.8em;
+}
+
+#main {
+    width: 100%;
+}
+
+/* Add transition to containers so they can push in and out */
+#layout,
+#menu,
+.navigator-link {
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -ms-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+}
+
+#menu {
+    margin-left: -150px; /* "#menu" width */
+    width: 150px;
+    position: fixed;
+    top: 0;
+    left: 150px;
+    bottom: 0;
+    z-index: 1000; /* so the menu or its navicon stays above all content */
+    background: #191818;
+    overflow-y: auto;
+    -webkit-overflow-scroll: touch;
+}
+
+#menu a {
+    color: #999;
+    border: none;
+    white-space: normal;
+    padding: 0.5em 0 0.5em 0.8em;
+}
+
+#menu .navigator-open {
+    background: transparent;
+    border: 0;
+}
+
+#menu .navigator ul {
+    border: none;
+    background: transparent;
+}
+
+#menu .navigator ul,
+#menu .navigator .menu-item-divided {
+    border-top: 1px solid #333;
+}
+
+#menu .navigator li a:hover,
+#menu .navigator li a:focus {
+    background: #333;
+}
+
+.navigator-link {
+    display: none; 
+    top: 0;
+    left: 150px; 
+    padding: 0.95em;
+    z-index: 1000;
+}
+
+.navigator-link:hover,
+.navigator-link:focus {
+    background: #000;
+}
+
+#menu .navigator-heading {
+    font-size: 110%;
+    color: #fff;
+}
+#menu .navigator-heading:hover,
+#menu .navigator-heading:focus {
+    color: #999;
+}
+
+#menu .navigator-selected {
+    background: #495C72;
+}
+
+#menu .navigator-selected a {
+    color: #fff;
+}
+
+#menu li.navigator-selected a:hover,
+#menu li.navigator-selected a:focus {
+    background: none;
+}
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#error_explanation {
+  width: 95%;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  margin-bottom: 0px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+/* --------------------------
+ * Responsive Styles
+ * --------------------------
+*/
+
+@media (max-width: 870px) {
+
+    /* Navigation Push Styles */
+    #layout {
+        position: relative;
+        padding-left: 0;
+    }
+    /* TODO: put this on top */
+    
+    #layout.desktop-active {
+        position: relative;
+        left: 150px;
+
+    }
+    #layout.active #menu {
+        left: 150px;
+        width: 150px;
+    }
+
+    #menu {
+        left: 0;
+    }
+
+    .navigator-link {
+        background-color: #000000;
+        position: fixed;
+        left: 0;
+        display: block;
+    }
+
+    #layout.active .navigator-link {
+        left: 150px;
+    }
+
+    .bar-title {
+      margin-left: 0px; /* left col width "#menu" */
+    }
+    
+    .bar-title .button-prev:first-child {
+      margin-left: 3.75em;
+    }
+}
+
+
+tr.order-table td {
+  border-top:1px solid #EEE; padding-top: 5px; border-bottom:1px solid #EEE; padding-bottom:5px
+}
+
+tr.line-top td {
+  border-top:1px solid #EEE; padding-top: 5px; 
+}
+
+.prescription-container input {
+  width : 80px;
+  margin-right : 20px;
+  margin-top: 5px;
+}

@@ -1,0 +1,29 @@
+<div class="center-box">
+  <span class="avatar">
+    <img src="<%= "http://graph.facebook.com/#{@user.uid}/picture?width=200&height=200" %>" width="100" />
+  </span>
+  <h3><%= @user.name %></h3>
+</div>
+<div class="info-box">
+  <% if @user.provider == "facebook" %>
+  <div class="item"><img src="/assets/facebook-icon.png"/> <span><%= link_to (@user.username || "facebook profile"), "https://www.facebook.com/profile.php?id=#{@user.uid}"%></span></div>
+  <% end %>
+  <% if current_user && @user.id == current_user.id %>
+    <div class="item"><img src="/assets/credit-icon.png"/> <span class='total-credit'><%= @user.total_credit %> credits</span></div>
+    <div class="item"><img src="/assets/invite-icon.png"/> <a href='/users/<%= @user.id %>/edit'><span>edit profile</span></a></div>
+    <div class="item"><img src="/assets/invite-icon.png"/> <a href='<%= user_orders_path(current_user) %>'><span>order status</span></a></div>
+  <% end %>
+</div>
+<div class="info-box">
+  <div class="item" jsclass="invite-friends" style='cursor:pointer'><img src="/assets/invite-icon.png"/> <span>invite your friend to earn credits</span></div>
+</div>
+<div class="info-box">
+  <div class="item"><img src="/assets/earn-credit-icon.png"/> <a href="/referral"><span>how to earn credits</span></a></div>
+</div>
+<div class="info-box">
+  <div class="item"><img src="/assets/iphone-icon.png"/> <a href="/apps"><span>download iPhone app</span></a></div>
+  <div class="item"><img src="/assets/android-icon.png"/> <a href="/apps"><span>download Android app</span></a></div>
+</div>
+<div class="info-box">
+  <div class="item"><img src="/assets/logout-icon.png"/> <%= link_to "Sign out", signout_path, id: "sign_out" %></div>
+</div>

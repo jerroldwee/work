@@ -1,0 +1,18 @@
+shared_settings: &shared_settings
+  email_sender: "admin@figoeyewear.com"
+  receivers:
+    - "willie@rubify.com"
+    - "kelly@rubify.com"
+    - "ivy@rubify.com"
+  
+development:
+  <<: *shared_settings
+  host: https://figo.fwd.wf/
+  
+staging:
+  <<: *shared_settings
+  host: http://figoeyewear.projectwebby.com/
+
+production:
+  <<: *shared_settings
+  host: http://www.figoeyewear.com/

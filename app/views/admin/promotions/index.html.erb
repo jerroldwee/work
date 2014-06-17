@@ -1,0 +1,39 @@
+<!-- listing -->
+<div class="grid-auto">
+  <div class="unit-3-8">
+    <div class="box">
+      <%= link_to 'New Promotion', new_admin_promotion_path, :class => 'button-positive' %>
+    </div>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="unit-1">
+    <ul class="list">
+      <li class="list-divider">
+        <div class="grid">
+          <div class="unit-1-8">Title</div>
+          <div class="unit-3-8">Description</div>
+          <div class="unit-3-8">Action</div>
+        </div>
+      </li>
+      <% @entries.each do |entry| %>
+      <li>
+        <div class="grid-auto">
+          <div class="unit-1-8"><%= entry.title %></div>
+          <div class="unit-3-8"><%= entry.description %><br/><%= link_to entry.url, entry.url %></div>
+          <div class="unit-3-8">
+            <%= link_to 'Edit', edit_admin_promotion_url(entry), :class => "button" %>
+            <%= link_to 'Delete', admin_promotion_url(entry), method: :delete, data: { confirm: 'Are you sure?' }, :class => "button-negative" %>
+          </div>
+        </div>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="digg_pagination box">
+  <%= will_paginate @entries %>
+</div>
+

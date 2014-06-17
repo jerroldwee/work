@@ -1,0 +1,30 @@
+<div class="grid">
+  <div class="unit-1">
+    <div class="box">
+      <p id="notice"><%= notice %></p>
+      <p>
+        <%= link_to 'Edit', edit_admin_len_path(@entry), :class => "button-positive", :style => "float : right" %>
+        <h1><%= @entry.name %></h1>
+      </p>
+      <hr/>
+
+      <table>
+        <tr>
+          <td><strong>Price</strong></td>
+          <td>&nbsp; : &nbsp;</td>
+          <td><%= @entry.price %></td>
+        </tr>
+
+      </table>
+
+    </div>
+  </div>
+  <div class="unit-1">
+    <div class="box">
+      <%= link_to 'Back', admin_lens_path, :class => "button" %>
+    </div>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,37 @@
+<%= form_for(@entry.new_record? ? [:admin, @product, @entry] : @entry , :url => @entry.new_record? ? nil : admin_product_model_image_path(@product, @entry), :as => :model_image, :html => {:class => "simple-form simple-form-stacked", :multipart => true, :method => @entry.new_record? ? :post : :put }) do |f| %>
+
+<%# form_for([:admin, @product, @entry], :html => {:class => "simple-form simple-form-stacked", :multipart => true }) do |f| %>
+  <% if @entry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this image from being saved:</h2>
+      <ul>
+      <% @entry.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <legend>Fill in the content below</legend>
+
+    <%= image_tag @entry.upload.url(:small) if @entry.upload.exists? %>
+    <br/>
+    
+    <%= f.file_field :upload %>
+
+    <br/>
+
+    <%= hidden_field_tag :model, params[:model] %>
+    <%= f.hidden_field :product_id %>
+    <br/>
+    <%= f.submit "Save Data", :class => "simple-button simple-button-primary button-positive" %>
+
+  </fieldset>
+
+<% end %>
+
+
+
+
+

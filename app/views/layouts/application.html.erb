@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Figo Eyewear</title>
+  <meta name="viewport" content="width = device-width, initial-scale = 1, user-scalable = no, minimum-scale = 1, maximum-scale = 1, target-densityDpi=160dpi"/>
+  <!-- width=device-width causes the iPhone 5 to letterbox the app, so we want to exclude it for iPhone 5 to allow full screen apps -->
+  <meta name="viewport" id="vp" content="initial-scale=1.0,user-scalable=no,maximum-scale=1" media="(device-height: 568px)" />
+
+<meta name="format-detection" content="telephone=no"/>
+
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => false %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
+
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="layout <%= @with_bg %>">
+  <div class="content">
+    <% unless @comingsoon %>
+    <div class="grid-auto">
+      <div class="unit-1-3">
+        <h1 class="logo <%= @alternative%>"><a href='/'>Figo<span>Eyewear</span></a></h1>
+      </div>
+      <div class="unit-2-3">
+        <div class="navigation">
+          <ul class="menu">
+            <li><a href="/about">About</a></li>
+            <li><a href="/products/men">Men</a></li>
+            <li><a href="/products/women">Women</a></li>
+            <li><a href="/faq">Help/FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-auto">
+      <div class="unit-2-3">
+      </div>
+      <div class="unit-1-3">
+        <div class="menu-cart">
+          <a href="/carts">Shopping Cart <span class="total-cart"><%= cookies[:cart] && cookies[:cart].size > 0 ? "(#{JSON.parse(cookies[:cart]).inject(0){|c,v|c+v["quantity"]}})".gsub("(0)", "") : "" %></span></a> | 
+          <% if current_user %>
+            Signed in as <strong><%= link_to current_user.name, user_path(current_user) %></strong>!
+            <%= link_to "Sign out", signout_path, id: "sign_out" %>
+          <% else %>
+            <%= link_to "Sign in", log_in_path, id: "sign_in" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <% else %>
+    <div class="grid-auto">
+      <div class="unit-1-3">
+        <h1 class="logo"><a href='/'>Figo<span>Eyewear</span></a></h1>
+      </div>
+    </div>
+    <% end %>
+
+    <%= yield %>
+
+  </div>
+</div>
+
+<% if @about_us_page %>
+<div class="layout">
+  <div class="content">
+
+    <div class="grid-auto information">
+      <div class="unit-1-3">
+        <div class="box">
+        <h4>Acetate frame</h4>
+        <p>Our frames are made from custom cellulose acetate. Unlike plastic, cellulose acetate can be produced in brilliant colors and patterns; it also retains its shape and sheen with age. 
+        </p>
+        <p>
+        Some of our frames are made from the high quality materials, including acetate and lightweight titanium and TR material from Japan and Korea. All our frames are lightweight, durable and resistant and comes in exciting colours for you.
+        </p>
+        </div>
+      </div>
+      <div class="unit-1-3">
+        <div class="box">
+        <h4>Titanium frame</h4>
+        <p>
+    Our frames are made of the strongest, highest-quality materials, including acetate and lightweight titanium and TR materials from Japan and Korea. The frames are manufactured and assembled in China. We have personally visited these factories to ensure quality products are manufactured and leave them factories in good order. 
+        </p>
+
+        <p>
+    The frames are then shipped to our labs in the Singapore, where we cut your lenses according to your prescription.
+        </p>
+        </div>
+      </div>
+      <div class="unit-1-3">
+        <div class="box">
+        <h4>Lenses</h4>
+        <p>
+    Our prescription lenses are made from polycarbonate, which is thinner and lighter than traditional plastic or glass lenses. In addition, polycarbonates are impact-resistant material on the market and offers 100% UV protection. 
+        </p>
+        <p>
+      All of our lenses are coated twice with one of the best anti-reflective and anti-scratch coatings, which promises finest quality.
+        </p>  
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-auto box">
+      <div class="unit-1">
+        <h2 style="font-family: Helvetica; font-weight: normal; text-align: center; padding-bottom: 20px; color: #1AACE6;">We are committed to provide quality and fashionable eyewear  with superior eye care services at very affordable prices.</h2>
+        <p style="margin-bottom: -13px; text-align: center;">
+          <%= image_tag "philosophy.jpg" %>
+        </p>
+      </div>
+    </div>
+
+    <div class="grid-auto">
+      <div class="unit-1-3">
+        <div class="boxy">
+          <%= image_tag("highlight_spec.jpg") %>
+          <h4><%= link_to "Meet all our collections", products_path %></h4>
+        </div>
+      </div>
+      <div class="unit-1-3">
+        <div class="boxy">
+          <%= image_tag("highlight_collection.jpg") %>
+          <h4><%= link_to "TRY OUT our Spectacles", visual_try_on_users_path %></h4>
+        </div>
+      </div>
+      <div class="unit-1-3">
+        <div class="boxy">
+          <%= image_tag("highlight_location.jpg") %>
+          <h4><%= link_to "Find Location NEAR You", "/contactus" %></h4>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<% end %>
+
+<% unless @comingsoon %>
+<div class="footer clearfix">
+  <div class="wrapper">
+    <div class="grid-auto">
+      <div class="unit-1-4">
+        <h4>Eyewear and Frames</h4>
+        <ul>
+          <li><a href="/products/men">Men eyewears</a></li>
+          <li><a href="/products/women">Women eyewears</a></li>
+          <li><a href="/products/unisex">Unisex eyewears</a></li>
+          <!-- <li><a href="/products/special">Special Edition</a></li> -->
+          <!-- <li><a href="/products/friends">Buy for your friends</a></li> -->
+        </ul>
+      </div>
+      <div class="unit-1-4">
+        <h4>Get to know FIGO</h4>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/philosophy">Philosophy</a></li>
+          <li><a href="/faq">Frequently Asked Questions</a></li>
+          <li><a href="/contactus">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="unit-1-4">
+        <h4>How we can help?</h4>
+        <ul>
+          <li><a href="/faq#shipping">Shipping Rate for International</a></li>
+          <li><a href="/returns">Returns and Exchanges</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/referral">Referral Campaign</a></li>
+        </ul>
+      </div>
+      <div class="unit-1-4">
+        <h4>Social Network</h4>
+        <ul>
+          <li><a href="//www.facebook.com/figoeyewear">Figo Eyewear Facebook Page</a></li>
+          <li><a href="//www.facebook.com/CustomizeSportsLens">Customize Sport Lense Page</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="copyright">
+  Copyright &copy; 2013 Figo Eyewears Pte Ltd
+</div>
+
+<% end %>
+
+</body>
+</html>

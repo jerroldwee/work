@@ -1,0 +1,57 @@
+.resizer {
+  width : 100%;
+  height : 100%;
+  border : 1px solid #000;
+  position : absolute;
+  background : url(<%= asset_path 'blank.png' %>) repeat;
+}
+.ghost:hover .resizer {
+  display : block;
+}
+
+.knob {
+  position : absolute;
+  width : 20px;
+  height : 20px;
+  -webkit-border-radius : 13px;
+  -moz-border-radius : 13px;
+  -ms-border-radius : 13px;
+  border-radius : 13px;
+}
+
+.knob1 {
+  top : -10px;
+  left : -10px;
+}
+
+.knob2 {
+  top : -10px;
+  right : -10px;
+}
+
+.knob3 {
+  bottom : -10px;
+  left : -10px;
+}
+
+.knob4 {
+  bottom : -10px;
+  right : -10px;
+}
+
+.glass-frame {
+  position : absolute; 
+  border : 1px solid rgba(0,0,0,0);
+}
+
+.glass-frame.active {
+  border : 1px solid #000;
+  border : 1px solid rgba(0,0,0,0.2);
+}
+
+.glass-frame.active .knob {
+  background : #fff;
+  background : rgba(255,255,255,0.2);
+  border : 3px solid #333;
+  border : 3px solid rgba(30,30,30,0.4);  
+}

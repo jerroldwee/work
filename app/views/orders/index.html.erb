@@ -1,0 +1,37 @@
+<div class="grid-auto profile">
+  <div class="unit-1-4">
+    <%= render :partial => "users/user_sidebar.html.erb" %>
+  </div>
+  <div class="unit-3-4">
+    <div class="container marginleftright">
+      <h2>Orders</h2>
+
+      <table class="order-list">
+        <tr>
+            <td>Order No</td>          
+            <td>Amount</td>
+            <td>Status</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <% @entries.each do |entry| %>
+        <tr>
+            <td><%= entry.order_number %></td>
+            <td>$<%= entry.amount %></td>
+            <td><%= entry.order_status || "" %> - <%= entry.payment_type %></td>
+            <td></td>
+            <td>
+              <%= link_to 'Show', user_order_url(current_user, entry), :class => "button" %>
+            </td>
+        </tr>
+        <% end %>
+      </table>
+
+
+      <div class="digg_pagination box">
+        <%= will_paginate @entries %>
+      </div>
+
+    </div>
+  </div>
+</div>

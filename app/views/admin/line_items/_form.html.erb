@@ -1,0 +1,114 @@
+<%= form_for(["admin", @order, @entry], :html => {:class => "simple-form simple-form-stacked"}) do %>
+  <% if @entry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this image from being saved:</h2>
+      <ul>
+      <% @entry.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="grid-auto container">
+    <div class="unit-1-1">
+      <h3>Lens Prescription 
+        <br/><%= @entry.product.title %> - <%= @entry.color_name %> - <%= @entry.lens ? @entry.lens.name : "" %>
+      </h3>
+      <br/>
+    </div>
+  </div>
+
+  <% @entry_meta = @entry %>
+  <% @entry_prefix = "entry[info]" %>
+
+  <div class="grid-auto container prescription-container">
+    <div class="unit-1-2 entry">
+      <table cellpadding="0" cellspacing="0">
+        <tr>
+          <td colspan="4" class="header" style="padding-bottom : 10px;"><b>Right (OD)</b></td>
+        </tr>
+        <tr>
+          <td>Distance</td>
+          <td>Sphere</td>
+          <td>Cylinder</td>
+          <td>Axis</td>
+        </tr>
+        <tr>
+          <td>Bifocal</td>
+          <td><input type="text" name="<%= @entry_prefix %>[prescription_right_bifocal_sphere]" value="<%= @entry_meta.meta("prescription_right_bifocal_sphere") %>"/></td>
+          <td><input type="text" name="<%= @entry_prefix %>[prescription_right_bifocal_cylinder]" value="<%= @entry_meta.meta("prescription_right_bifocal_cylinder") %>"/></td>
+          <td><input type="text" name="<%= @entry_prefix %>[prescription_right_bifocal_axis]" value="<%= @entry_meta.meta("prescription_right_bifocal_axis") %>"/></td>
+        </tr>
+        <tr>
+          <td>Reading</td>
+          <td><input type="text" name="<%= @entry_prefix %>[prescription_right_reading_sphere]" value="<%= @entry_meta.meta("prescription_right_reading_sphere") %>"/></td>
+          <td><input type="text" name="<%= @entry_prefix %>[prescription_right_reading_cylinder]" value="<%= @entry_meta.meta("prescription_right_reading_cylinder") %>"/></td>
+          <td><input type="text" name="<%= @entry_prefix %>[prescription_right_reading_axis]" value="<%= @entry_meta.meta("prescription_right_reading_axis") %>"/></td>
+        </tr>
+      </table>
+    </div>
+    <div class="unit-1-2 entry">
+      <table cellpadding="0" cellspacing="0">
+        <tr>
+          <td colspan="4" class="header" style="padding-bottom : 10px;"><b>Left (OD)</b></td>
+        </tr>
+        <tr>
+          <td>Distance</td>
+          <td>Sphere</td> 
+          <td>Cylinder</td>
+          <td>Axis</td>
+        </tr>
+        <tr>
+          <td>Bifocal</td>
+          <td><input type="text" name="<%= @entry_prefix %>[prescription_left_bifocal_sphere]" value="<%= @entry_meta.meta("prescription_left_bifocal_sphere") %>"/></td>
+          <td><input type="text" name="<%= @entry_prefix %>[prescription_left_bifocal_cylinder]" value="<%= @entry_meta.meta("prescription_left_bifocal_cylinder") %>"/></td>
+          <td><input type="text" name="<%= @entry_prefix %>[prescription_left_bifocal_axis]" value="<%= @entry_meta.meta("prescription_left_bifocal_axis") %>"/></td>
+        </tr>
+        <tr>
+          <td>Reading</td>
+          <td><input type="text" name="<%= @entry_prefix %>[prescription_left_reading_sphere]" value="<%= @entry_meta.meta("prescription_left_reading_sphere") %>"/></td>
+          <td><input type="text" name="<%= @entry_prefix %>[prescription_left_reading_cylinder]" value="<%= @entry_meta.meta("prescription_left_reading_cylinder") %>"/></td>
+          <td><input type="text" name="<%= @entry_prefix %>[prescription_left_reading_axis]" value="<%= @entry_meta.meta("prescription_left_reading_axis") %>"/></td>
+        </tr>
+      </table>
+    </div>
+    <div class="unit-1-4">
+      <br/>
+      <label>F.P.D:</label>
+      <input type="text" name="<%= @entry_prefix %>[prescription_fpd]" value="<%= @entry_meta.meta("prescription_fpd") %>"/>
+    </div>
+    <div class="unit-1-4">
+      <br/>
+      <label>N.P.D:</label>
+      <input type="text" name="<%= @entry_prefix %>[prescription_npd]" value="<%= @entry_meta.meta("prescription_npd") %>"/>
+    </div>
+    <div class="unit-1-4">
+      <br/>
+      <label>Segment H:</label>
+      <input type="text" name="<%= @entry_prefix %>[prescription_segment_h]" value="<%= @entry_meta.meta("prescription_segment_h") %>"/>
+    </div>
+    <div class="unit-1-8">
+      <br/>
+      <label>m/m up:</label>
+      <input type="text" name="<%= @entry_prefix %>[prescription_mm_up]" value="<%= @entry_meta.meta("prescription_mm_up") %>" class="simple-input-1-2"/>
+    </div>
+    <div class="unit-1-8">
+      <br/>
+      <label>down:</label>
+      <input type="text" name="<%= @entry_prefix %>[prescription_mm_down]" value="<%= @entry_meta.meta("prescription_mm_down") %>" class="simple-input-1-2"/>
+    </div>
+  </div>
+
+  <div class="grid-auto" style="padding-top: 30px">
+    <div class="unit-1-4">
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />      
+      <input type="submit" class="big-blue-button" value="Save"/>
+      <br/><br/>
+    </div>
+  </div>
+
+<% end %>
+
+
+

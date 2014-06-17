@@ -1,0 +1,60 @@
+<form action="/admin/orders/csv" method="post" style="padding : 20px; float : right" class="simple-form">
+  <input type='hidden' name="search" value="<%= params[:search] %>"/>
+
+  Month <select name="month">
+    <%= options_for_select [["All", ""]] + (1..12).to_a.map{|m|t = Time.mktime(2000, m, 1); [t.strftime("%B"), t.strftime("%m")]}, params[:month] %>
+  </select>
+  Year
+  <select name="year">
+    <%= options_for_select [["All", ""]] + Order.select("year(created_at) as year").group("year").all.map{|o|o.year}, params[:year] || Time.now.strftime("%Y") %>
+  </select>
+  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />   
+  <input type='submit' value='Download CSV' class="button-positive"/>
+</form>
+
+<form action="/admin/orders" method="get" style="padding : 20px" class="simple-form">
+  <input type='text' style="width : 230px;" name="search" value="<%= params[:search] %>" class="simple-input-rounded"/>
+  <input type='submit' value='Search' class="button-main"/>
+</form>
+
+
+<div class="grid">
+  <div class="unit-1">
+    <ul class="list">
+      <li class="list-divider">
+        <div class="grid">
+          <div class="unit-1-8">Order No</div>
+          <div class="unit-3-8">Email</div>
+          <div class="unit-1-8">Amount</div>
+          <div class="unit-1-8">Status</div>
+          <div class="unit-1-8"></div>
+          <div class="unit-1-8"></div>
+        </div>
+      </li>
+      <% @entries.each do |entry| %>
+      <li>
+        <div class="grid-auto">
+          <div class="unit-1-8"><%= entry.order_number %></div>
+          <div class="unit-3-8">
+            <%= entry.user ? (entry.user.name.to_s) || "" : "" %>
+            <%= entry.user && entry.user.name ? "<br/>".html_safe : "" %> 
+            <%= entry.paypal_email || "" %>
+            <%= entry.email%>
+          </div>
+          <div class="unit-1-8">$<%= entry.amount %></div>
+          <div class="unit-1-8"><%= entry.order_status || "" %> - <%= entry.payment_type %></div>
+          <div class="unit-1-8"></div>
+          <div class="unit-1-8">
+            <%= link_to 'Show', admin_order_url(entry), :class => "button" %>
+          </div>
+        </div>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="digg_pagination box">
+  <%= will_paginate @entries %>
+</div>
+

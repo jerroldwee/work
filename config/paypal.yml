@@ -1,0 +1,17 @@
+production:
+  sandbox: false
+  username: admin_api1.figoeyewear.com
+  password: QQKA4WSUW7C6TAME
+  signature: AFcWxV21C7fd0v3bYYYRCpSSRl31AVstW4dwuKSBjLOo2E4etcipOLf0
+
+staging:
+  sandbox: true
+  username: chardy_1345002707_biz_api1.gmail.com
+  password: 1345002729
+  signature: ACCy.hQWY-QXFwmadz8khuNx97nDAV9Epyanf9yGD6BEX8tSEGykjnUK
+
+development:
+  sandbox: true
+  username: chardy_1345002707_biz_api1.gmail.com
+  password: 1345002729
+  signature: ACCy.hQWY-QXFwmadz8khuNx97nDAV9Epyanf9yGD6BEX8tSEGykjnUK

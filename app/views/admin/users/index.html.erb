@@ -1,0 +1,51 @@
+<form action="/admin/users" method="get" style="padding : 20px" class="simple-form">
+  <input type='text' style="width : 230px;" name="search" value="<%= params[:search] %>" class="simple-input-rounded"/>
+  <input type='submit' value='Search' class="button-main"/>
+</form>
+
+<div class="grid">
+  <div class="unit-1">
+    <ul class="list">
+      <li class="list-divider">
+        <div class="grid">
+          <div class="unit-1-8">Name</div>
+          <div class="unit-3-8">Email</div>
+          <div class="unit-1-8">Credit</div>
+          <div class="unit-1-8">Total Upload</div>
+          <div class="unit-1-12">Share</div>
+          <div class="unit-1-12">Order</div>
+          <div class="unit-1-12">Profile</div>
+        </div>
+      </li>
+      <% @entries.each do |entry| %>
+      <li>
+        <div class="grid-auto">
+          <div class="unit-1-8"><%= entry.name %></div>
+          <div class="unit-3-8"><%= entry.email %></div>
+          <div class="unit-1-8"><%= entry.total_credit %></div>
+          <div class="unit-1-8"><%= entry.user_fit_rooms.where("temprary IS NULL OR temprary = ?", false).count %></div>
+          <div class="unit-1-12"><%= 
+            facebook_count = entry.user_fit_rooms.where("(temprary IS NULL OR temprary = ?) AND facebook_post_id IS NOT NULL", false).count
+            if facebook_count > 0
+              link_to facebook_count, photos_admin_user_path(entry)
+            else
+              facebook_count
+            end
+          %></div>
+          <div class="unit-1-12"><%= link_to entry.orders.count, admin_orders_path(:user_id => entry.id ) %></div>
+          <div class="unit-1-12"><%= link_to "Profile", user_path(entry), :class => "button-main" %> <%= link_to("Facebook", "https://www.facebook.com/profile.php?id=#{entry.uid}", :class => "button") if entry.uid %>
+            <% if params[:add_as_admin] %>
+              <%= "<br/>".html_safe + link_to("Add as Admin", admin_moderator_path(entry), method: :put, data: { confirm: 'Are you sure?' }, :class => "button-positive") %>
+            <% end %>
+          </div>
+        </div>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="digg_pagination box">
+  <%= will_paginate @entries %>
+</div>
+

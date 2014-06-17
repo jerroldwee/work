@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Figo</title>
+  <meta name="viewport" content="width = device-width, initial-scale = 1, user-scalable = no, minimum-scale = 1, maximum-scale = 1, target-densityDpi=160dpi"/>
+  <!-- width=device-width causes the iPhone 5 to letterbox the app, so we want to exclude it for iPhone 5 to allow full screen apps -->
+  <meta name="viewport" id="vp" content="initial-scale=1.0,user-scalable=no,maximum-scale=1" media="(device-height: 568px)" />
+
+  <meta name="format-detection" content="telephone=no"/>
+
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag    "admin", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "admin", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="grid-auto" id="layout">
+    <a href="#menu" id="menuLink" class="navigator-link">
+    <img src="/assets/navicon-png2x.png" width="20" alt="Menu toggle">
+    </a>
+    
+    <div class="unit" id="menu">
+      <div class="navigator navigator-open">
+          <a class="navigator-heading" href="/">Figo Admin</a>
+          <ul>
+            <li style="display:none" class=""><a href="#">Dashboard</a></li>
+            <li class="admin-products"><%= link_to "Products", [:admin, :products] %></li>
+            <li class="admin-lens"><%= link_to "Lens", [:admin, :lens] %></li>
+            <li class="admin-promotions"><%= link_to "Promotions", [:admin, :promotions] %></li>
+            <li class="admin-orders"><%= link_to "Orders", [:admin, :orders] %></li>
+            <li class="admin-customers"><%= link_to "Customers", [:admin, :users] %></li>
+            <li class="admin-moderators"><%= link_to "Admins", [:admin, :moderators] %></li>
+            <li class="admin-settings menu-item-divided"><%= link_to "Settings", [:admin, :settings] %></a></li>
+            <li class=""><a href="#">Logout</a></li>
+          </ul>
+      </div>
+    </div>
+    
+    <div class="unit" id="main">
+      <header class="bar-title">
+        <h1 class="title">
+          <%= @controller_name || "Products" %>
+        </h1>
+      </header>
+    </div>
+    <div class="container">
+      <%= yield %>
+    </div>
+  </div>
+</body>
+</html>

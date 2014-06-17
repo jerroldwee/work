@@ -1,0 +1,33 @@
+<form action="/admin/users/<%= @user.id %>/photos" method="get" style="padding : 20px" class="simple-form">
+  <input type='text' style="width : 230px;" name="search" value="<%= params[:search] %>" class="simple-input-rounded"/>
+  <input type='submit' value='Search' class="button-main"/>
+</form>
+
+<div class="grid">
+  <div class="unit-1">
+    <ul class="list">
+      <li class="list-divider">
+        <div class="grid">
+          <div class="unit-1-8">Photo</div>
+          <div class="unit-1-8">Date shared</div>
+          <div class="unit-1-8">No. of likes</div>
+          <div class="unit-5-8">Caption</div>
+        </div>
+      </li>
+      <% @entries.each do |entry| %>
+      <li>
+        <div class="grid-auto">
+          <div class="unit-1-8"><%= image_tag entry.target_image.url(:small), width: 80, height: 107 %></div>
+          <div class="unit-1-8"><%= entry.facebook_json["created_time"] %></div>
+          <div class="unit-1-8"><%= entry.facebook_json["likes"]["data"].count %></div>
+          <div class="unit-5-8"><%= entry.facebook_json["name"] %></div>           
+        </div>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="digg_pagination box">
+  <%= will_paginate @entries if @entries.present? %>
+</div>

@@ -1,0 +1,72 @@
+<div class="grid">
+  <div class="unit-1">
+    <div class="box">
+      <p id="notice"><%= notice %></p>
+      <p>
+        <%= link_to 'Edit', edit_admin_product_choice_path(@product, @entry), :class => "button-positive", :style => "float : right" %>
+        <h1><%= @entry.product.code %> &#x2012; <%= @entry.product.title %> / <%= @entry.color_name %></h1>
+      </p>
+      <hr/>
+
+      <table>
+        <tr>
+          <td><strong>Inventory</strong></td>
+          <td>&nbsp; : &nbsp;</td>
+          <td><%= @entry.inventory_count %></td>
+        </tr>
+      </table>
+
+
+      <% if !@entry.new_record? %>
+      <br/>
+      <br/>
+      <p style='margin-bottom : 10px'>
+        <strong style='line-height:32px'>Product Color Images: </strong>
+        <%= link_to 'Add Image', new_admin_product_choice_product_image_url(@product, @entry), :class => 'button-positive' %>
+      </p>
+      <% end %>
+
+      <% if @product_images %>
+
+      <div class="grid">
+        <div class="unit-1">
+          <ul class="list reorder-wrapper" reorderapi="<%= reorder_admin_product_choice_product_images_path(@product, @entry) %>">
+            <li class="list-divider">
+              <div class="grid">
+                <div class="unit-1-8">...</div>
+                <div class="unit-3-8">Image</div>
+                <div class="unit-3-8">Action</div>
+              </div>
+            </li>
+
+            <% @product_images.each do |image| %>
+            <li class="reorder-item" itemid="<%= image.id %>">
+              <div class="grid-auto">
+                <div class="unit-1-8" jsclass="drag-item">=</div>
+                <div class="unit-3-8">
+                  <%= image_tag image.upload.url(:small) if image.upload.exists? %>
+                </div>
+                <div class="unit-3-8">
+                  <%# link_to 'Show', admin_product_choice_product_image_path(@product, @entry, image), :class => "button" %>            
+                  <%= link_to 'Edit', edit_admin_product_choice_product_image_path(@product, @entry, image), :class => "button-positive" %>
+                  <%= link_to 'Delete', admin_product_choice_product_image_path(@product, @entry, image), method: :delete, data: { confirm: 'Are you sure?' }, :class => "button-negative" %>
+                </div>
+              </div>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+
+      <% end %>
+
+
+    </div>
+  </div>
+  <div class="unit-1">
+    <div class="box">
+      <%= link_to 'Back', admin_product_path(@product), :class => "button" %>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,2 @@
+module Admin::LensHelper
+end

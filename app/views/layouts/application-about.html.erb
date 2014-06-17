@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Figo</title>
+  <meta name="viewport" content="width = device-width, initial-scale = 1, user-scalable = no, minimum-scale = 1, maximum-scale = 1, target-densityDpi=160dpi"/>
+  <!-- width=device-width causes the iPhone 5 to letterbox the app, so we want to exclude it for iPhone 5 to allow full screen apps -->
+  <meta name="viewport" id="vp" content="initial-scale=1.0,user-scalable=no,maximum-scale=1" media="(device-height: 568px)" />
+
+<meta name="format-detection" content="telephone=no"/>
+
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="layout <%= @with_bg %>">
+  <%= yield %>
+</div>
+
+<% unless @comingsoon %>
+<div class="footer clearfix">
+  <div class="wrapper">
+    <div class="grid-auto">
+      <div class="unit-1-4">
+        <h4>Eyewear and Frames</h4>
+        <ul>
+          <li><a href="/products/men">Men eyewears</a></li>
+          <li><a href="/products/women">Women eyewears</a></li>
+          <li><a href="/products/unisex">Unisex eyewears</a></li>
+          <li><a href="/products/special">Special Edition</a></li>
+          <li><a href="/products/friends">Buy for your friends</a></li>
+        </ul>
+      </div>
+      <div class="unit-1-4">
+        <h4>Get to know FIGO</h4>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/philosophy">Philosophy</a></li>
+          <li><a href="/faq">Frequently Asked Questions</a></li>
+          <li><a href="/contactus">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="unit-1-4">
+        <h4>How we can help?</h4>
+        <ul>
+          <li><a href="/shipping">Shipping Rate for International</a></li>
+          <li><a href="/returnsexchange">Returns and Exchanges</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/referral">Referral Campaign</a></li>
+        </ul>
+      </div>
+      <div class="unit-1-4"></div>
+
+    </div>
+  </div>
+</div>
+<div class="copyright">
+  Copyright &copy; 2013 Figo Eyewears Pte Ltd
+</div>
+
+<% end %>
+
+</body>
+</html>

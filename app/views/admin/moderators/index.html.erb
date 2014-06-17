@@ -1,0 +1,41 @@
+<form action="/admin/users" method="get" style="padding : 20px" class="simple-form">
+  <input type='text' style="width : 230px;" name="search" value="<%= params[:search] %>" class="simple-input-rounded"/>
+  <input type='submit' value='Search' class="button-main"/>
+</form>
+
+<div class="grid">
+  <div class="unit-1">
+    <ul class="list">
+      <li class="list-divider">
+        <div class="grid">
+          <div class="unit-1-8">Name</div>
+          <div class="unit-5-8">Email</div>
+          <div class="unit-1-8">Profile</div>
+          <div class="unit-1-8">Action</div>
+        </div>
+      </li>
+      <% @entries.each do |entry| %>
+      <li>
+        <div class="grid-auto">
+          <div class="unit-1-8"><%= entry.name %></div>
+          <div class="unit-5-8"><%= entry.email %></div>
+          <div class="unit-1-8"><%= link_to "Profile", user_path(entry), :class => "button-main" %> <%= link_to("Facebook", "https://www.facebook.com/profile.php?id=#{entry.uid}", :class => "button") if entry.uid %></div>
+          <div class="unit-1-8"><%= link_to 'Delete', admin_moderator_url(entry), method: :delete, data: { confirm: 'Are you sure?' }, :class => "button-negative" %></div>           
+        </div>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="digg_pagination box">
+  <%= will_paginate @entries %>
+</div>
+
+
+<form action="/admin/users" method="get" style="padding : 20px" class="simple-form">
+  Search and add to admin
+  <input type='hidden' name='add_as_admin' value='1'/>
+  <input type='text' style="width : 230px;" name="search" value="<%= params[:search] %>" class="simple-input-rounded"/>
+  <input type='submit' value='Search' class="button-positive"/>
+</form>

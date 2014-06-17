@@ -1,0 +1,64 @@
+#!/bin/sh
+# set -u
+set -e
+# Example init script, this can be used with nginx, too,
+# since nginx and unicorn accept the same signals
+ 
+# Feel free to change any of the following variables for your app:
+APP_ROOT=/home/app/www/figo_rails
+PID=$APP_ROOT/tmp/pids/figo_app.pid
+ENV=production
+CMD="/usr/local/bin/bundle exec /usr/local/bin/unicorn -D -E $ENV -c $APP_ROOT/config/unicorn.rb "
+GEM_HOME=/var/lib/gems/1.9.1/gems
+USER=app
+ 
+old_pid="$PID.oldbin"
+ 
+cd $APP_ROOT || exit 1
+ 
+sig () {
+  test -s "$PID" && kill -$1 `cat $PID`
+}
+ 
+oldsig () {
+  test -s $old_pid && kill -$1 `cat $old_pid`
+}
+ 
+case $1 in
+start)
+  sig 0 && echo >&2 "Already running" && exit 0
+  echo "Starting unicorn at: $APP_ROOT"
+  CD_TO_APP_DIR="cd $APP_ROOT"
+  if [ `whoami` = root ]; then
+    su - $USER -c "$CD_TO_APP_DIR > /dev/null 2>&1 && $CMD"
+  else
+    $CD_TO_APP_DIR > /dev/null 2>&1 && $CMD
+  fi  
+  ;;
+stop)
+  sig QUIT && exit 0
+  echo >&2 "Not running"
+  ;;
+force-stop)
+  sig TERM && exit 0
+  echo >&2 "Not running"
+  ;;
+restart|reload)
+  sig HUP && echo reloaded OK && exit 0
+  echo >&2 "Couldn't reload, starting '$CMD' instead"
+  $CMD
+  ;;
+upgrade)
+  sig USR2 && exit 0
+  echo >&2 "Couldn't upgrade, starting '$CMD' instead"
+  $CMD
+  ;;
+rotate)
+  sig USR1 && echo rotated logs OK && exit 0
+  echo >&2 "Couldn't rotate logs" && exit 1
+  ;;
+*)
+  echo >&2 "Usage: $0 <start|stop|restart|upgrade|rotate|force-stop>"
+  exit 1
+  ;;
+esac

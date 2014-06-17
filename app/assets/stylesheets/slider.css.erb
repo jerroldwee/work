@@ -1,0 +1,203 @@
+/* Slider CSS */
+
+.product-showcase .slider-container {
+  width : 50%;
+  max-width: 100%;
+}
+
+.product-showcase .slider {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-showcase .slider > div.slide {
+  overflow: hidden;
+  clear: both;
+}
+
+.product-showcase .slider > div.slide img {
+  width : 100%;
+}
+
+.product-showcase .slider > div.slide,
+.product-showcase .slider > img.slide {
+  width : 100%;
+}
+
+.product-showcase .slider > div.slide,
+.product-showcase .slider > img.slide {
+  display: none;
+}
+
+.product-showcase .slider > div.slide:first-child,
+.product-showcase .slider > img.slide:first-child {
+  display: block;
+}
+
+.product-showcase .slider-activated > div.slide,
+.product-showcase .slider-activated > img.slide {
+  display: block;
+  position: absolute;
+  top : 0px;
+  left: 0px;
+}
+
+.product-showcase .slider-control {
+  padding-top: 25px;
+  text-align: center;
+}
+
+.product-showcase .bullet {
+  width : 10px;
+  height: 10px;
+  display: inline-block;
+  *display: inline;
+  -webkit-border-radius : 5px;
+  -moz-border-radius : 5px;
+  border-radius : 5px;
+  margin : 0px 5px;
+  cursor: pointer;
+  background-position: center center; 
+  background-repeat : no-repeat; 
+}
+
+.product-showcase .bullet.square {
+  width : 20px;
+  height: 20px;
+  font-size : 11px;
+  -webkit-border-radius : 2px;
+  -moz-border-radius : 2px;
+  border-radius: 2px;
+  color: #FFF;
+  line-height: 20px;
+  text-align: center;
+}
+
+.product-showcase .bullet:hover {
+  background: #666;
+}
+
+.product-showcase .slider-control .bullet {
+  background: #999;
+}
+
+.product-showcase .slider-control .bullet.active {
+  background: #04AAEA;
+}
+
+.product-showcase .slider-control-activated .bullet.active {
+  background: #04AAEA;
+}
+
+.product-showcase .slider-container.paralax .bullet.active {
+  background: #04AAEA;
+}
+
+.product-showcase .image-thumbnail {
+  width : 80px;
+  height: 40px;
+  display: inline-block;
+  float: left;
+  -webkit-border-radius : 5px;
+  -moz-border-radius : 5px;
+  border-radius : 5px;
+  margin : 0px 5px;
+  cursor: pointer;
+  background-position: center center; 
+  background-repeat : no-repeat;  
+}
+
+.product-showcase .slider-control .image-thumbnail {
+  border : 1px solid #CCC;
+}
+
+.product-showcase .slider-control-activated .image-thumbnail.active {
+  border : 1px solid #111;
+}
+
+.product-showcase .slider-horizontal {
+  overflow: hidden;
+}
+
+.product-showcase .slider-horizontal .slider {
+  margin-right: 90px;
+}
+
+.product-showcase .slider-horizontal .slider-control {
+  float : right;
+  width : 90px;
+}
+
+.product-showcase .thumbnail {
+  width : 80px;
+  height: 40px;
+  display: inline-block;
+  float: left\9;
+  -webkit-border-radius : 5px;
+  -moz-border-radius : 5px;
+  border-radius : 5px;
+  margin : 0px 5px;
+  cursor: pointer;
+  background-position: center center; 
+  background-repeat : no-repeat;  
+  border : 1px solid #CCC;
+}
+
+.product-showcase .model-source {
+  display : none;
+}
+/* -- Slider CSS */
+
+.product-showcase .box-height {
+  height: 350px;
+}
+
+/* tabs */
+.product-showcase .box-fit {
+  width : 860px;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.product-showcase .medium-box-fit {
+  width : 430px;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.product-showcase .tabs {
+  position: relative;
+  left: 50%;
+  top: 0;
+  padding: 0;
+  margin: 10px auto;
+  display: block;
+  float: left;
+  clear: right;
+  list-style: none;
+}
+
+.product-showcase .tabs .tab {
+  position: relative;
+  right: 50%;
+  top: 0;
+  padding: 10px;
+  display: block;
+  float: left;    
+  border: 1px solid #EEE;
+  margin-right : 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.product-showcase .tabs .tab.active {
+  border: 1px solid #04AAEA;
+}
+
+.product-showcase .tab-containers > div {
+  display : none;
+}
+
+.product-showcase .tab-containers > div.active {
+  display : block;
+}

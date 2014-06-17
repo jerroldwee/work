@@ -1,0 +1,68 @@
+<div class="grid-auto profile">
+  <div class="unit-1-4">
+    <%= render :partial => "users/user_sidebar.html.erb" %>
+  </div>
+  <div class="unit-3-4">
+    <div class="container marginleftright">
+      <h2>Orders #<%= @order.order_number %></h2>
+
+      <% @total = 0 %>    
+      <div class='line-items'>
+        <%= render(:partial => 'carts/cart_items.html.erb') %>
+      </div>
+
+      <div class="grid-auto container" style="margin-top: -30px;">
+      <!-- line-items summary -->
+      <div class="unit-3-5">
+        <div class="product-credit">
+          <% if current_user && current_user.total_credit > 0 && !@on_user_order_show %>
+          <div class="credit">Apply Credit: <input type="number" jsclass="credit-field" max="<%= current_user.total_credit %>" name="discount_credit" value="<%= @discount_credit %>"></div>
+          <div class="info">Maximum 50 credits per purchase, 1 credit = $0.5 discount</div>
+          <% end %>
+        </div>
+      </div>
+      <div class="unit-2-5">
+        <div class="product-summary">
+          <table>
+            <tr class="subtotal">
+              <td>Subtotal:</td>
+              <td class="amount subtotal-amount">$ <%= "%.2f" %  @total %></td>
+            </tr>
+            <% if current_user %>
+            <tr>
+              <td>Discount:</td>
+              <% max_discount = [@total, (@discount_credit * 0.5)].min %>
+              <td class="amount discount-amount" discount="<%= max_discount %>">$ <%= (max_discount) %></td>
+              <% @total -= max_discount %>
+            </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+      <div class="unit-1-5">
+        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />   
+      </div>
+     <hr class="blue"/>
+      <div class="unit-3-5"></div>
+      <div class="unit-2-5">
+        <div class="product-summary">
+          <table>
+            <tr class="subtotal">
+              <td>Total:</td>
+              <td class="amount total-amount">$ <%= "%.2f" % @total %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="unit-1-5"></div>
+    </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

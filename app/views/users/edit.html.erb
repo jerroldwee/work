@@ -1,0 +1,45 @@
+<div class="grid-auto profile">
+  <div class="unit-1-4">
+    <%= render :partial => "user_sidebar.html.erb" %>
+  </div>
+  <div class="unit-3-4">
+    <div class="container marginleftright">
+      <h2>Edit Profile</h2>
+
+      <%= form_for(@user, :html => {:class => "simple-form simple-form-stacked"}) do |f| %>
+        <%= flash[:notice] %>
+        <% if @user.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@user.errors.count, "error") %> prohibited this admin_product from being saved:</h2>
+
+            <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <fieldset>
+          <%= f.label :name %>
+          <%= f.text_field :name, :class => "simple-input-2-3" %>
+
+          <%= f.label :email %>
+          <%= f.text_field :email, :class => "simple-input-2-3" %>
+        
+          <%= f.label :username %>
+          <%= f.text_field :username %>
+        
+          <label for="user_nric">NRIC</label>
+          <%= f.text_field :nric %>
+        
+          <br/>
+          <%= f.submit "Save", :class => "simple-button simple-button-primary" %>
+
+        </fieldset>
+
+      <% end %>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,201 @@
+<div class="grid-auto product-spec">
+  <div class="unit-2-3">
+    <div class="frame-details">
+      <h2><%= @product.title %></h2>
+      <div class="details">
+        <%= @product.description %>
+      </div>
+    </div>
+  </div>
+  <div class="unit-1-3">
+    <table class="frame-spec">
+      <tr>
+        <td class="bold">Material:</td>
+        <td><%= @product.material_name %></td>
+      </tr>
+      <tr>
+        <td class="bold">Frame Shape:</td>
+        <td><%= @product.frame_shape_name %></td>
+      </tr>
+      <tr>
+        <td class="bold">Width:</td>
+        <td><%= @product.frame_width_name %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="grid-auto product-details">
+  <div class="unit-2-3">
+    <div class="product-showcase">
+        <div class="product-visual">
+          <a class="blue-button" href="/users/visual_try_on/?product_id=<%=@product.id%><%= @product.male? ? "&male=1" : "" %>">Visual Try On</a>
+        </div>
+        <h3>Slide the picture to see more angles</h3>
+        <!-- here to put your slider div -->
+        <div class='tab-containers'>
+
+          <% @product.choices.each_with_index do |choice, j| %>
+
+            <div class='<%= j == 0 ? "active" : "" %> slider-container box-fit box-height'>
+              <div class='slider' jsclass='slideshow-drag'>
+                <% for image in choice.product_images.order("position ASC, id ASC") do %>
+                  <div class='slide'><%= image_tag image.upload.url(:large) %></div>
+                <% end %>
+              </div>
+              <div class='slider-control clearfix'>
+                <% choice.product_images.each_with_index do |image, i| %>
+                  <div class='<%= i == 0 ? "active" : "" %> bullet square' jsclass='slideshow-jump-to'><%= i + 1 %></div>
+                <% end %>
+              </div>
+            </div>
+
+          <% end %>
+
+          <% if @product.has_male_image? %>
+            <!-- MODEL -->
+            <div class='slider box-fit box-height' jsclass='model-track'>
+              <%= image_tag @product.first_male_model_image_url(:large) %>
+              <div class='model-source'>
+                <!-- Image loop for model source -->
+                <% for image in @product.male_model_images.order("position ASC, id ASC") do %>
+                  <%= image_tag image.upload.url(:large) %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+
+          <% if @product.has_female_image? %>
+            <!-- MODEL -->
+            <div class='slider box-fit box-height' jsclass='model-track'>
+              <%= image_tag @product.first_female_model_image_url(:large) %>
+              <div class='model-source'>
+                <!-- Image loop for model source -->
+                <% for image in @product.female_model_images.order("position ASC, id ASC") do %>
+                  <%= image_tag image.upload.url(:large) %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+
+        </div>
+
+        <div class='box-fit'>
+          <div class='tabs'>
+            <% @product.choices.each_with_index do | choice, j | %>
+              <!-- GREEN -->
+              <div class='<%= j == 0 ? "active" : "" %> tab' jsclass='switch-tab switch-radio' color_id='<%= choice.color_id %>'>
+                <%= image_tag choice.first_image_url(:small), :width => "80" %>
+              </div>
+            <% end %>
+
+            <% if @product.has_male_image? %>
+              <!-- Model -->
+              <div class='tab' jsclass='switch-tab'>
+                <%= image_tag @product.first_male_model_image_url(:small), :width => "80" %>
+              </div>
+            <% end %>
+
+            <% if @product.has_female_image? %>
+              <!-- Model -->
+              <div class='tab' jsclass='switch-tab'>
+                <%= image_tag @product.first_female_model_image_url(:small), :width => "80" %>
+              </div>
+            <% end %>
+
+          </div>
+        </div>
+      <!-- end of your slider div -->
+    </div>
+    <!-- end of product showcase -->
+    <div class="container">
+      <div class="grid-auto">
+        <div class="unit-1-2">
+          <h3 class="marginright">Lens:</h3>
+          <ul>
+            <li>Made from polycarbonate, the most impact-resistant material on the market.</li>
+            <li>Offer 100% UV protection.</li>
+            <li>Coated twice with anti-reflective coating.</li>
+            <li>Anti-scratch coating included.</li>
+            <li>Single vision lens comes in polycarbonate, ultra thin and photochromic types.</li>
+            <li>Progressive lens comes in ultra thin, polarised and transition types.</li>
+          </ul>
+        </div>
+        <div class="unit-1-2">
+          <h3 class="marginright">Materials:</h3>
+          <ul>
+            <li>Our frames are made from the high quality materials, including acetate and lightweight titanium and TR material from Japan and Korea.</li>
+            <li>All our frames are lightweight, durable and resistant and comes in exciting colours for you.</li>
+            <li>Three-barrel hinges and teflon coated screws for durability.</li>
+            <li>Cut from a single sheet of acetate to maintain color parity.</li>
+            <li>Polished at least twice for a minimum of ten days to ensure a lasting finish.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% @total = @product.price || 0 %>
+  <form jsclass="add-to-cart" action="/carts/new" method="get" class="unit-1-3" style="background-color: #F2F2F2; margin-top: 10px;">
+    <div class="cart">
+      <table class="cart-info">
+        <tr class="header">
+          <td class="title"><h4>Crane</h4><span>frame</span></td>
+          <td class="price main main-price" price="<%= @product.price || 0 %>">$ <%= "%.2f" %  (@product.price || 0) %></td>
+        </tr>
+      </table>
+      <hr>
+      <div class="product-color">
+        <div class="color-title">Colours:</div>
+        <ul class="color-list">
+          <% @product.choices.each_with_index do |choice, i| %>
+            <li><input class="color-id-radio" type="radio" value="<%= choice.color_id %>" <%= i == 0 ? 'checked="checked"' : '' %> name="color_id"> <%= choice.color_name %></li>
+          <% end %>
+        </ul>
+        <input type='hidden' name='product_id' value="<%= @product.id %>"/>
+      </div>
+
+      <hr>
+      <table class="cart-info">
+        <% Lens.order("price ASC").all.each_with_index do |lens, i| %>
+        <% @total += i == 1 ? lens.price : 0 %>
+        <tr>
+          <td class="title"><input class="lens-radio" jsclass="lens-radio" price="<%= lens.price %>" type="radio" value="<%= lens.id %>" <%= i == 1 ? 'checked="checked"' : '' %> name="lens_id"> <%= lens.name %></td>
+          <td class="price">$ <%= "%.2f" % lens.price %></td>
+        </tr>
+        <% end %>
+      </table>
+      <hr>
+      <table class="cart-info">
+        <tr class="header">
+          <td class="title">Total</td>
+          <td class="price total total-price">$ <%= "%.2f" % @total %></td>
+        </tr>
+      </table>
+      <hr>
+      <div class="add to cart">
+        <button class="add-to-cart-button" style="cursor : pointer">Add to Cart</button>
+      </div>
+    </div>
+  </form>
+
+  <div class="grid-auto container">
+    <div class="unit-1-1">
+      <h3>Try our visual try on feature before you buy</h3>
+    </div>
+    <div class="unit-1-3 text-content">
+      <img src="/assets/1-take-a-photo.png"/><br/>
+      Take a photo and see the frames on your face instantly.
+    </div>
+    <div class="unit-1-3 text-content">
+      <img src="/assets/2-shop.png"/><br/>
+      Find a retail location near you where all our frames are ready to try on.
+    </div>
+    <div class="unit-1-3 text-content">
+      <img src="/assets/3-mobile-apps.png"/><br/>
+      Download our apps to take a portrait photo and upload to facebook for different frames that you like.
+    </div>
+  </div>
+
+</div>
+

@@ -1,0 +1,39 @@
+<div class="grid-auto collection-banner">
+  <div class="unit-1-1">
+      <%= image_tag "all.jpg" %>
+  </div>
+</div>
+<div class="grid-auto container">
+  <div class="unit-1-2">
+    <h3>Login with Facebook</h3>
+    <div class="facebook-login">
+      <div>You can login directly using your Facebook Account:</div>
+      <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in", :class => "facebook-button" %><br/>
+    </div>
+  </div>
+  <div class="unit-1-2">
+    <h3>Login with figoeyewear.com account</h3>
+    <br/>
+    <%= form_tag sessions_path, class: "simple-form simple-form-aligned"  do %>  
+    <div class="simple-control-group">
+      <%= label_tag :email %>
+      <%= text_field_tag :email, params[:email] %>  
+    </div>
+    <div class="simple-control-group">
+      <%= label_tag :password %> 
+      <%= password_field_tag :password %>  
+    </div>
+    <div style="padding-left: 148px">
+      <%= submit_tag "Login", class: "small-blue-button" %>
+    </div>
+
+    <div style="padding-top: 5px; padding-left: 148px; font-size: 13px;">
+      <%= check_box_tag :remember_me, 1, params[:remember_me] %>
+      <%= label_tag :remember_me, nil, :class => 'remember-me', :style => "vertical-align: top; line-height: 24px;" %><br/><br/>
+      Don't have account yet? <%= link_to "Sign Up Now", sign_up_path %>
+      <%#= link_to "forgotten password?", new_password_reset_path %>
+    </div>
+<% end %>
+
+  </div>
+</div>

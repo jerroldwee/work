@@ -1,0 +1,53 @@
+<%= form_for([:admin, @product], :html => {:class => "simple-form simple-form-stacked"}) do |f| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this admin_product from being saved:</h2>
+
+      <ul>
+      <% @product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <legend>Fill in the content below</legend>
+    <% @product_fit_room_images.each do |image| %>
+    <%= image_tag image.upload.url(:small) if image.upload.exists? %>
+    <% end %>
+    <%= f.label :code %>
+    <%= f.text_field :code %>
+
+    <%= f.label :title %>
+    <%= f.text_field :title, :class => "simple-input-2-3" %>
+  
+    <%= f.label :description %>
+    <%= f.text_area :description, :class => "simple-input-2-3" %>
+  
+    <%= f.label :price %>
+    <%= f.text_field :price %>
+  
+    <%= f.label :product_type %>
+    <%= f.select :product_type, ["Frame"] %>
+
+    <%= f.label :gender %>
+    <%= f.select :gender, [["Unisex", "Unisex"], ["Men", "Male"], ["Women", "Female"]] %>
+
+    <%= f.label :material %>
+    <%= f.select :material_id, Product.material_selections %>
+
+    <%= f.label :frame_shape %>
+    <%= f.select :frame_shape_id, Product.frame_shape_selections %>
+
+    <%= f.label :frame_width %>
+    <%= f.select :frame_width_id, Product.frame_width_selections %>
+
+    <br/>
+    <%= f.submit "Save Data", :class => "simple-button simple-button-primary button-positive" %>
+
+  </fieldset>
+
+<% end %>
+
+

@@ -1,0 +1,39 @@
+<!-- listing -->
+<div class="grid-auto">
+  <div class="unit-3-8">
+    <div class="box">
+      <%= link_to 'New Lens', new_admin_len_path, :class => 'button-positive' %>
+    </div>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="unit-1">
+    <ul class="list">
+      <li class="list-divider">
+        <div class="grid">
+          <div class="unit-1-8">Title</div>
+          <div class="unit-3-8">Price</div>
+          <div class="unit-3-8">Action</div>
+        </div>
+      </li>
+      <% @entries.each do |entry| %>
+      <li>
+        <div class="grid-auto">
+          <div class="unit-1-8"><%= entry.name %></div>
+          <div class="unit-3-8">$<%= entry.price %></div>
+          <div class="unit-3-8">
+            <%= link_to 'Edit', edit_admin_len_url(entry), :class => "button" %>
+            <%= link_to 'Delete', admin_len_url(entry), method: :delete, data: { confirm: 'Are you sure?' }, :class => "button-negative" %>
+          </div>
+        </div>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="digg_pagination box">
+  <%= will_paginate @entries %>
+</div>
+

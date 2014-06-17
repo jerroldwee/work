@@ -1,0 +1,26 @@
+<%= form_for([:admin, @product, @choice, @entry], :html => {:class => "simple-form simple-form-stacked", :multipart => true }) do |f| %>
+  <% if @entry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this image from being saved:</h2>
+      <ul>
+      <% @entry.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <legend>Fill in the content below</legend>
+
+    <%= image_tag @entry.upload.url(:small) if @entry.upload.exists? %>
+    <br/>
+    
+    <%= f.file_field :upload %>
+
+    <%= f.hidden_field :choice_id %>
+    <%= f.submit "Save Data", :class => "simple-button simple-button-primary button-positive" %>
+
+  </fieldset>
+
+<% end %>

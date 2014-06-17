@@ -1,0 +1,37 @@
+<div class="grid-auto collection-banner">
+  <div class="unit-1-1">
+    <% if @for_women %>
+      <%= image_tag "women.jpg" %>
+    <% elsif @for_men %>
+      <%= image_tag "men.jpg" %>
+    <% else %>
+      <%= image_tag "all.jpg" %>
+    <% end %>
+  </div>
+</div>
+
+<form onsubmit="return false" class="browse-content"> 
+
+  <div class="grid-auto product-listing">
+    <div class="unit-1">
+      <div class="product-filter">
+        <%= render(:partial => "products/filter_list.html.erb") %>
+      </div>
+    </div>
+    <div class="unit-1">
+      <% if @for_men %>
+        <input type="hidden" name="gender" value="Male"/>
+      <% end %>
+      <% if @for_women %>
+        <input type="hidden" name="gender" value="Female"/>
+      <% end %>
+      <% if @for_unisex %>
+        <input type="hidden" name="gender" value="Unisex"/>
+      <% end %>
+      <div class="grid-auto products content-wrapper">
+        <%= render(:partial => "products/list.html.erb") %>
+      </div>
+    </div>
+  </div>
+
+</form>

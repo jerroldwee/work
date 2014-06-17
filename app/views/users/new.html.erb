@@ -1,0 +1,49 @@
+<div class="grid-auto collection-banner">
+  <div class="unit-1-1">
+      <%= image_tag "all.jpg" %>
+  </div>
+</div>
+
+<div class="grid-auto">
+  <div class="unit-1-1 container">
+    <h2>Sign Up</h2>
+  </div>
+  <div class="unit-1-1">
+    <% if @user.errors.any? %>
+      <div class="error_messages container">
+        <h3>Submission is invalid</h3>
+        <ul>
+          <% for message in @user.errors.full_messages %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+    <%= form_for @user, html: {class: "simple-form simple-form-aligned"} do |f| %>
+    <fieldset>
+      <div class="simple-control-group">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+      </div>
+      <div class="simple-control-group">
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+      </div>
+      <div class="simple-control-group">
+        <%= f.label :username %>
+        <%= f.text_field :username %>
+      </div>
+      <div class="simple-control-group">
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+      </div>
+      <div class="simple-control-group">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation %>
+      </div>
+    </fieldset>
+      
+    <%= f.submit "Submit", :class => "blue-button" %>
+    <% end %>
+</div>

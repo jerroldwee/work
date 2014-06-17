@@ -1,0 +1,54 @@
+<!-- listing -->
+<div class="grid-auto">
+  <div class="unit-3-8">
+    <div class="box">
+      <%= link_to 'New Product', new_admin_product_path, :class => 'button-positive'%>
+    </div>
+  </div>
+  <div class="unit-5-8" style="text-align: right;">
+    <div class="box">
+      <form action="/admin/products" method="get" class="simple-form">
+        <input type='text' style="width : 230px;" name="search" value="<%= params[:search] %>" class="simple-input-rounded"/>
+        <input type='submit' value='Search' class="button-main"/>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="grid">
+  <div class="unit-1">
+    <ul class="list">
+      <li class="list-divider">
+        <div class="grid">
+          <div class="unit-1-8"><%= link_to "Code", "/admin/products?order=code&order_type=#{params[:order_type] == "desc" ? "asc" : "desc"}" %></div>
+          <div class="unit-3-8">Description</div>
+          <div class="unit-1-8">Type</div>
+          <div class="unit-1-8">Action</div>
+          <div class="unit-1-8"></div>
+          <div class="unit-1-8" style="text-align:right"><%= link_to "Order Total", "/admin/products?order=total_order_count&order_type=#{params[:order_type] == "desc" ? "asc" : "desc"}" %></div>
+        </div>
+      </li>
+      <% @products.each do |product| %>
+      <li>
+        <div class="grid-auto">
+          <div class="unit-1-8"><%= product.code %></div>
+          <div class="unit-3-8"><%= product.title %> - <%= product.description %></div>
+          <div class="unit-1-8"><%= product.gender %> - <%= product.product_type %></div>
+          <div class="unit-3-8">
+            <%= link_to 'Show', admin_product_url(product), :class => "button" %>
+            <%# link_to 'Edit', edit_admin_product_path(product), :class => "button-positive" %>
+            <%= link_to 'Delete', admin_product_url(product), method: :delete, data: { confirm: 'Are you sure?' }, :class => "button-negative" %>
+          </div>
+        </div>
+        <span class="count"><%= link_to(product.line_items.count, admin_orders_path(:product_id => product.id), :style => "color:#FFF") %></span>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="digg_pagination box">
+  <%= will_paginate @products %>
+</div>
+

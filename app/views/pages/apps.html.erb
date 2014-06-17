@@ -1,0 +1,22 @@
+<div class="grid-auto collection-banner">
+  <div class="unit-1-1">
+      <%= image_tag "all.jpg" %>
+  </div>
+</div>
+<div class="grid-auto" style="padding-top: 10px;">
+  <div class="unit-1-4">
+    <%= render partial: 'menu' %>
+  </div>
+  <div class="unit-3-4 container">
+    <div class="box">
+      <h2>Available on Apple App Store and Google Play Store</h2>
+      <h3>Virtually Try On our products with our latest apps</h3>
+      <br/>
+      <%= link_to image_tag("appstore.png"), "https://itunes.apple.com/sg/app/figoeyewear/id734368951?mt=8", :target => "_blank" %>
+      <%= link_to image_tag("playstore.png"), "//bit.ly/1f5YEx8", :target => "_blank" %>
+      <br/><br/>
+      <%= image_tag "iphoneandroid.jpg" %>
+    </div>
+  </div>
+
+</div>

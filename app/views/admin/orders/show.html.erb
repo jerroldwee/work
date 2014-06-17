@@ -1,0 +1,134 @@
+<div class="grid">
+  <div class="unit-1">
+    <div class="box">
+      <p id="notice"><%= notice %></p>
+      <p>
+        <%# link_to 'Edit', edit_admin_order_path(@entry), :class => "button-positive", :style => "float : right" %>
+        <h1><%= @entry.order_number %></h1>
+      </p>
+      <hr/>
+
+      <div class="delivery-info">
+        <%= @entry.full_name %> <br/>
+        <%= @entry.address_line_1 %> <br/>
+        <%= @entry.address_line_2 %> <br/>
+        <%= @entry.address_line_3 %> <br/>
+        <%= @entry.region %> <%= @entry.state %> <br/>
+        <%= @entry.country %> <%= @entry.postal_code %> <br/>
+        <b>Phone</b>: <%= @entry.contact_no %> <%= @entry.email %><br/>
+      </div>
+
+      <% @total = 0 %>
+
+      <table style="width:100%; margin-top : 20px">
+        <tr class='order-table'>
+          <td style="text-align : center">Code</td>
+          <td >Product Details</td>
+          <td >Unit</td>
+          <td style="text-align : right">Amount</td>
+        </tr>
+
+        <% for line in @entries %>
+          <tr class="entry">
+            <td style='text-align : center; width : 150px'>
+              <%= link_to line.product.code, admin_product_path(line.product) %><br/>
+              <%= image_tag line.product.first_image_url([line.color_id]), :width => "50%", :style => "float:none" %>
+            </td>
+            <td>
+              <div class="product-details">
+                <strong>Title: <%= link_to line.product.title, admin_product_path(line.product) %></strong>
+                <div class="color"><b>Color:</b> <%= line.color_name %></div>
+                <div class="lens"><b>Lens:</b> <%= line.lens ? line.lens.name : "" %></div>
+                <br/>
+                <div class="rx-info"><%= line.meta_str %>
+                </div>
+                <% if line.attachment %>
+                  <%= link_to "Attachment", line.attachment.upload.url, :target => "_blank" %>
+                <% end %>
+
+                <br/>
+                <%= link_to 'Edit', edit_admin_order_line_item_url(@entry, line), :class => "button" %>
+
+              </div>
+            </td>
+            <td>
+              <%= line.quantity %>
+            </td>
+            <td style='text-align: right'>
+              <% price = ((line.product.price||0) + (line.lens.price||0)) %>
+              <% amount = line.quantity * price %>
+              <% @total += amount %>
+              <div class="product-amount" price="<%= price %>">$<%= "%.2f" %  amount %></div>
+            </td>
+          </tr>
+        <% end %>
+
+        <tr class="line-top">
+          <td></td>
+          <td></td>
+          <td>Subtotal:</td>
+          <td style="text-align:right">$ <%= "%.2f" %  @total %></td>
+        </tr>
+        <% if @entry.delivery_amount > 0 %>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>Delivery:</td>
+            <td style="text-align:right">$ <%= "%.2f" %  (@entry.delivery_amount * @entry.delivery_quantity) %></td>
+            <% @total += @entry.delivery_amount * @entry.delivery_quantity %>
+          </tr>        
+        <% end %>
+        <% if @entry.discount_credit && @entry.discount_credit > 0 %>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>Discount:</td>
+          <% max_discount = [@total, (@entry.discount_credit * 0.5)].min %>
+          <td style="text-align:right">$ <%= (-max_discount) %></td>
+          <% @total -= max_discount %>
+        </tr>
+        <% end %>
+
+        <tr class="line-top">
+          <td></td>
+          <td></td>
+          <td>Total:</td>
+          <td style="text-align:right">$ <%= "%.2f" % @total %></td>
+        </tr>
+
+      </table>
+
+      <%= form_for(["admin", @entry], :html => {:class => "simple-form simple-form-stacked"}) do |f| %>
+
+        <fieldset>
+          
+          <%= f.label :status %>
+          <%= f.select :order_status, ["Processed", "Ready", "Delivery", "Pickup", "Refund"], {}, :class => "order-status-field", :style => "display:inline-block", :jsclass => "order-status" %>
+          <%= f.submit "Update Status", :class => "simple-button simple-button-primary" %>
+
+          <%= "<br/><br/>".html_safe + link_to(@entry.delivery_tracking_url, @entry.delivery_tracking_url) if @entry.delivery_tracking_url %>
+
+          <div class='delivery-tracking-form' style='display:none'>
+            <%= f.label :delivery_tracking_url %>
+            <%= f.text_field :delivery_tracking_url %>
+          </div>
+
+        </fieldset>
+
+      <% end %>
+
+
+
+
+
+    </div>
+  </div>
+  <div class="unit-1">
+    <div class="box">
+      <%= link_to 'Back', admin_orders_path, :class => "button" %>
+    </div>
+  </div>
+</div>
+
+
+

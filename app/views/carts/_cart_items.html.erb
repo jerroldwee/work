@@ -1,0 +1,63 @@
+<!-- products lists -->
+<!-- line item 1 -->
+<% unless @on_user_order_show %>
+<div class="unit-1-1">
+  <h2>Shopping Cart</h2>
+</div>
+<% end %>
+<div class="unit-1-5 title">Code</div>
+<div class="unit-2-5 title">Product Details</div>
+<% if @on_payment_mode %>
+<div class="unit-1-8 title">&nbsp;</div>
+<% end %>
+<div class="unit-1-8 title">Unit</div>
+<div class="unit-1-8 title" style="text-align : center">Amount</div>
+<div class="unit-1-8 title">&nbsp;</div>
+<hr class="blue"/>
+
+<% for line in @entries %>
+  <div class="entry">
+    <div class="unit-1-5" style='text-align : center'>
+      <%= link_to line.product.code, product_path(line.product) %><br/>
+      <%= image_tag line.product.first_image_url([line.color_id]), :width => "50%", :style => "float:none" %>
+    </div>
+    <div class="unit-2-5">
+      <div class="product-details">
+        <strong><%= link_to line.product.title, product_path(line.product) %></strong>
+        <div class="color"><%= line.color_name %></div>
+        <div class="lens"><%= line.lens ? line.lens.name : "" %></div>
+        <div class="rx-info"><%= line.meta_str %>
+        </div>
+        <% if !line.new_line_item? && !@on_payment_mode %>
+          <a href="/carts/<%= line.no %>" class="small-button">Edit</a>
+        <% end %>
+      </div>
+    </div>
+    <% if @on_payment_mode %>
+    <div class="unit-1-8" style='text-align : center'>
+    </div>
+    <% end %>
+    <div class="unit-1-8" style='text-align : center'>
+      <% if @on_payment_mode %>
+        <%= line.quantity %>
+      <% else %>
+        <div class="product-unit"><input type="number" name="entry[<%= line.no %>][quantity]" jsclass="<%= @on_payment_mode ? "nothing-field" : "quantity-field" %>" value="<%= line.quantity %>" min="1" class="simple-input-1-2"/></div>
+      <% end %>
+    </div>
+    <div class="unit-1-8">
+      <% price = ((line.product.price||0) + (line.lens.price||0)) %>
+      <% amount = line.quantity * price %>
+      <% @total += amount %>
+      <div class="product-amount" price="<%= price %>">$<%= "%.2f" %  amount %></div>
+    </div>
+    <div class="unit-1-8">
+      <% unless @on_payment_mode %>
+        <a href="#" class="small-button" jsclass="remove-quantity">&#x2573;</a>
+      <% end %>
+    </div>
+    <hr class="blue">
+    <input type="hidden" name="entry[<%= line.no %>][product_id]" value="<%= line.product_id %>" />
+    <input type="hidden" name="entry[<%= line.no %>][color_id]" value="<%= line.color_id %>" />
+    <input type="hidden" name="entry[<%= line.no %>][lens_id]" value="<%= line.lens_id %>" />
+  </div>
+<% end %>

@@ -1,0 +1,204 @@
+<div class="grid">
+  <div class="unit-1">
+    <div class="box">
+      <p id="notice"><%= notice %></p>
+      <p>
+        <%= link_to 'Edit', edit_admin_product_path(@product), :class => "button-positive", :style => "float : right" %>
+        <h1><%= @product.code %> &#x2012; <%= @product.title %></h1>
+      </p>
+      <hr/>
+
+      <table>
+        <tr>
+          <td><strong>Description</strong></td>
+          <td>&nbsp; : &nbsp;</td>
+          <td><%= @product.description %></td>
+        </tr>
+
+        <tr>
+          <td><strong>Price</strong></td>
+          <td>&nbsp; : &nbsp;</td>
+          <td><%= @product.price %></td>
+        </tr>
+
+        <tr>
+          <td><strong>Code</strong></td>
+          <td>&nbsp; : &nbsp;</td>
+          <td><%= @product.code %></td>
+        </tr>
+
+        <tr>
+          <td><strong>Product type</strong></td>
+          <td>&nbsp; : &nbsp;</td>
+          <td><%= @product.product_type %></td>
+        </tr>
+
+        <tr>
+          <td><strong>Gender</strong></td>
+          <td>&nbsp; : &nbsp;</td>
+          <td><%= @product.gender %></td>
+        </tr>
+
+        <tr>
+          <td><strong>Material</strong></td>
+          <td>&nbsp; : &nbsp;</td>
+          <td><%= @product.material_name %></td>
+        </tr>
+        <tr>
+          <td><strong>Frame Shape</strong></td>
+          <td>&nbsp; : &nbsp;</td>
+          <td><%= @product.frame_shape_name %></td>
+        </tr>
+        <tr>
+          <td><strong>Width</strong></td>
+          <td>&nbsp; : &nbsp;</td>
+          <td><%= @product.frame_width_name %></td>
+        </tr>
+
+      </table>
+
+      <% if !@product.new_record? %>
+      <br/>
+      <br/>
+      <p style='margin-bottom : 10px'>
+        <%= link_to 'Add Choice', new_admin_product_choice_url(@product), :class => 'button-positive' %>
+      </p>
+      <% end %>
+
+      <% if @product_choices %>
+
+      <div class="grid">
+        <div class="unit-1">
+          <ul class="list">
+            <li class="list-divider">
+              <div class="grid">
+                <div class="unit-1-8">Color</div>
+                <div class="unit-3-8">Images</div>
+                <div class="unit-3-8">Action</div>
+              </div>
+            </li>
+
+            <% @product_choices.each do |choice| %>
+            <li>
+              <div class="grid-auto">
+                <div class="unit-1-8"><%= choice.color_name %></div>
+                <div class="unit-3-8"><%= choice.product_images.select{|m|m.upload.exists?}.map{|m|image_tag m.upload.url(:small), :style => "max-width : 80px; margin-left:5px"}.join('').html_safe %></div>
+                <div class="unit-3-8">
+                  <%= link_to 'Show', admin_product_choice_path(@product, choice), :class => "button" %>            
+                  <%# link_to 'Edit', edit_admin_product_choice_path(@product, choice), :class => "button-positive" %>
+                  <%= link_to 'Delete', admin_product_choice_path(@product, choice), method: :delete, data: { confirm: 'Are you sure?' }, :class => "button-negative" %>
+                </div>
+              </div>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+
+      <% end %>
+
+
+      <% models = ["Male", "Female"] %>
+      <% models = ["Male"] if @product.gender == 'Men' || @product.gender == "Male" %>
+      <% models = ["Female"] if @product.gender == 'Women' || @product.gender == "Female" %>
+
+      <% models.each do |model| %>
+        <% if !@product.new_record? %>
+        <br/>
+        <br/>
+        <p style='margin-bottom : 10px'>
+          <%= link_to "Add #{model} Model Image", new_admin_product_model_image_url(@product, :model => model), :class => 'button-positive' %>
+        </p>
+        <% end %>
+
+        <% if @models[model] %>
+
+        <div class="grid">
+          <div class="unit-1">
+            <ul class="list reorder-wrapper" reorderapi="<%= reorder_admin_product_model_images_path(@product) %>">
+              <li class="list-divider">
+                <div class="grid">
+                  <div class="unit-1-8">...</div>
+                  <div class="unit-3-8">Image</div>
+                  <div class="unit-3-8">Action</div>
+                </div>
+              </li>
+
+              <% @models[model].each do |image| %>
+              <li class='reorder-item' itemid='<%= image.id %>'>
+                <div class="grid-auto">
+                  <div class="unit-1-8" jsclass='drag-item'>=</div>
+                  <div class="unit-3-8">
+                    <%= image_tag image.upload.url(:small) if image.upload.exists? %>
+                  </div>
+                  <div class="unit-3-8">
+                    <%= link_to 'Show', admin_product_model_image_path(@product, image), :class => "button" %>            
+                    <%# link_to 'Edit', edit_admin_product_model_image_path(@product, image), :class => "button-positive" %>
+                    <%= link_to 'Delete', admin_product_model_image_path(@product, image), method: :delete, data: { confirm: 'Are you sure?' }, :class => "button-negative" %>
+                  </div>
+                </div>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+
+        <% end %>
+      <% end %>
+
+
+      <% if !@product.new_record? %>
+      <br/>
+      <br/>
+      <p style='margin-bottom : 10px'>
+        <%= link_to 'Add Fit Room Image', new_admin_product_fit_room_image_url(@product), :class => 'button-positive' %>
+      </p>
+      <% end %>
+
+      <% if @product_fit_room_images %>
+
+      <div class="grid">
+        <div class="unit-1">
+          <ul class="list">
+            <li class="list-divider">
+              <div class="grid">
+                <div class="unit-1-8">Name</div>
+                <div class="unit-3-8">Image</div>
+                <div class="unit-3-8">Action</div>
+              </div>
+            </li>
+
+            <% @product_fit_room_images.each do |image| %>
+            <li>
+              <div class="grid-auto">
+                <div class="unit-1-8"><%= image.name %></div>
+                <div class="unit-3-8">
+                  <%= image_tag image.upload.url(:small) if image.upload.exists? %>
+                </div>
+                <div class="unit-3-8">
+                  <%= link_to 'Show', admin_product_fit_room_image_path(@product, image), :class => "button" %>            
+                  <%# link_to 'Edit', edit_admin_product_choice_path(@product, choice), :class => "button-positive" %>
+                  <%= link_to 'Delete', admin_product_fit_room_image_path(@product, image), method: :delete, data: { confirm: 'Are you sure?' }, :class => "button-negative" %>
+                </div>
+              </div>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+
+      <% end %>
+
+
+
+    </div>
+  </div>
+  <div class="unit-1">
+    <div class="box">
+      <%= link_to 'Back', admin_products_path, :class => "button" %>
+    </div>
+  </div>
+</div>
+
+
+
