@@ -1,5 +1,6 @@
 FigoRails::Application.routes.draw do
 
+  # get "brand/index"
   # get "credits/index"
   # get "credits/wall"
   # get "credits/first_login"
@@ -13,12 +14,15 @@ FigoRails::Application.routes.draw do
   # get "products/show"
   # get "products/index"
 
+
+
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
   get "login" => "sessions#new", :as => "log_in"
   get "signup" => "users#new", :as => "sign_up" 
   get 'admin', to: redirect('/admin/products')
+
 
   resources :sessions 
 
@@ -29,7 +33,9 @@ FigoRails::Application.routes.draw do
         get 'men'
         get 'women'
         get 'unisex'
+        get 'brand'
 
+        post  'brand'
         post 'product_types'
         post 'men'
         post 'women'
@@ -114,6 +120,19 @@ FigoRails::Application.routes.draw do
     end
   end
 
+  resources :brand do
+    collection do
+      get 'partial_list'
+      get 'men'
+      get 'women'
+      get 'unisex'
+
+    end
+    member do
+      get 'details'
+    end
+  end
+
   resources :user_fit_rooms do
     collection do
       post 'save'
@@ -171,6 +190,9 @@ FigoRails::Application.routes.draw do
 
   get '/comingsoon' => 'pages#comingsoon'
   post '/' => 'pages#index'
+
+  match '/contacts',     to: 'contacts#new',             via: 'get'
+  resources "contacts", only: [:new, :create]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

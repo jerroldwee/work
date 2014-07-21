@@ -1,0 +1,56 @@
+<table>
+  <thead>
+  <td width="50%">Brand</td>
+  </thead>
+
+  <tr>
+    <td>
+      <ul class="filter-list">
+
+            <li jsclass="search-type"><input type="checkbox" name="brand" value="Prada"/> Prada</li>
+        <li jsclass="search-type"><input type="checkbox" name="brand" value="Rayban"/> Rayban</li>
+
+      </ul>
+    </td>
+  </tr>
+
+</table>
+
+<table>
+  <thead>
+    <td width="15%">Material</td>
+    <td width="50%">Color</td>
+    <td width="15%">Frame Shape</td>
+    <td width="15%">Width</td>
+  </thead>
+  <tr>
+    <td>
+      <ul class="filter-list">
+        <% for material in (@materials || Material.order("name ASC").all) %>
+          <li jsclass="search-type"><input type="checkbox" name="material[]" value="<%= material.id %>"/> <%= material.name %></li>
+        <% end %>
+      </ul>
+    </td>
+    <td>
+      <ul class="filter-list">
+        <% for color in (@colors || Color.order("name ASC").all) %>
+          <li jsclass="search-type"><input type="checkbox" name="color[]" value="<%= color.id %>"/> <%= color.name %></li>
+        <% end %>
+      </ul>
+    </td>
+    <td>
+      <ul class="filter-list">
+        <% for frame_shape in (@frame_shapes || FrameShape.order("name ASC").all) %>
+          <li jsclass="search-type"><input type="checkbox" name="frame_shape[]" value="<%= frame_shape.id %>"/> <%= frame_shape.name %></li>
+        <% end %>
+      </ul>
+    </td>
+    <td>
+      <ul class="filter-list">
+        <% for frame_width in (@frame_widths || FrameWidth.order("name ASC").all) %>
+          <li jsclass="search-type"><input type="checkbox" name="frame_width[]" value="<%= frame_width.id %>"/> <%= frame_width.name %></li>
+        <% end %>
+      </ul>
+    </td>
+  </tr>
+</table>

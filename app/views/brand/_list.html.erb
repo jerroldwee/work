@@ -1,0 +1,14 @@
+<div class='digg_pagination'>
+<%= will_paginate(@products).to_s.gsub("brand/partial_list", "brand").to_s.gsub(/href=['"]([^'"]*)['"]/,'href="\1" jsclass="reload-page"').html_safe %>
+</div>
+<% for product in @products do %>
+  <div class="unit-1-3 product"><a href="<%= "/products/#{product.id}" %>" jsclass="<%= @visual_try_on ? 'try-product' : 'show-product' %>" itemid="<%= product.id %>" male="<%= product.male? ? 1 : 0 %>"><%= image_tag product.first_fit_room_image_url(@color_priorities) %><br/><%= product.title %></a>
+  </div>
+<% end %>
+<% if @products.size == 0 %>
+  
+<div style='letter-spacing : 0px'>
+  No Product Found
+</div>
+
+<% end %>

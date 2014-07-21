@@ -21,6 +21,9 @@
 //= require cart
 //= require jquery.icheck
 
+//= require cycle
+//= require vallenato
+
 
 $(document).ready(function(){
   

@@ -6,6 +6,8 @@ gem 'rails', '4.0.1'
 # Use mysql as the database for Active Record
 gem 'mysql2'
 
+gem 'paypal'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -26,9 +28,9 @@ gem 'will_paginate', '~> 3.0'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
-gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+gem 'paperclip'
 
-gem "non-stupid-digest-assets"
+gem 'non-stupid-digest-assets'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 1.2'
@@ -43,15 +45,16 @@ end
 gem 'bcrypt-ruby', :require => 'bcrypt'
 
 # Use unicorn as the app server
-gem 'unicorn'
+#gem 'unicorn'
 
 gem 'omniauth-facebook', '1.4.0'
 
+
 gem 'mini_magick'
 
-# gem 'paypal-payment', :git => 'vendor@appcepted.com:/home/vendor/pp_paypal'
+#gem 'paypal-payment', :git => 'vendor@appcepted.com:/home/vendor/pp_paypal'
 
-gem 'paypal-payment', :git => 'git@github.com:chardy/paypal-payment.git', tag: "v0.1.2"
+gem 'paypal-payment'
 
 gem 'country_select'
 
@@ -62,3 +65,6 @@ gem 'country_select'
 # gem 'debugger', group: [:development, :test]
 
 gem 'thin'
+
+gem 'mail_form'
+gem 'simple_form'

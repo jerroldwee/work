@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131223034311) do
+ActiveRecord::Schema.define(version: 20140703084934) do
 
   create_table "attachments", force: true do |t|
     t.string   "guid"
@@ -73,6 +73,11 @@ ActiveRecord::Schema.define(version: 20131223034311) do
 
   create_table "colors", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "contacts", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -240,6 +245,7 @@ ActiveRecord::Schema.define(version: 20131223034311) do
     t.integer  "material_id"
     t.integer  "frame_shape_id"
     t.integer  "frame_width_id"
+    t.string   "brand"
   end
 
   add_index "products", ["frame_shape_id"], name: "index_products_on_frame_shape_id", using: :btree

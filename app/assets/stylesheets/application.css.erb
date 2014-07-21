@@ -16,6 +16,7 @@
  *= require pagination
  *= require resizer
  *= require_self
+
  */
 
 .field_with_errors {
@@ -1362,4 +1363,247 @@ table.order-list td {
 .additional-text {
   font-size:13px;
   margin-left:25px;
+}
+
+.example-pager span {
+    font-size: 50px;
+    width: 16px;
+    height: 16px;
+
+    color: #DDD;
+}
+.example-pager span.cycle-pager-active {
+    color: #D69746;
+}
+
+.button {
+    border: 0 none;
+    border-radius: 2px 2px 2px 2px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Arial,sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 20px;
+    margin-bottom: 0;
+    margin-top: 10px;
+    padding: 7px 10px;
+    text-transform: none;
+    transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -webkit-transition: all 0.3s ease 0s;
+    width: 16.795%;
+    /* auto */
+    text-align: center;
+    /* DELETE WHEN WIDTH AUTO */
+}
+.button.red {
+    background: none repeat scroll 0 0 #e0645c;
+    color: white;
+}
+.button.red:hover {
+    background: none repeat scroll 0 0 #999999;
+    color: white;
+}
+.button.dark {
+    background: none repeat scroll 0 0 #444444;
+    color: white;
+}
+.button.dark:hover {
+    background: none repeat scroll 0 0 #2db6cf;
+    color: white;
+}
+.button.light {
+    background: none repeat scroll 0 0 #999999;
+    color: white;
+}
+.button.light:hover {
+    background: none repeat scroll 0 0 #444444;
+    color: white;
+}
+.button.green {
+    background: none repeat scroll 0 0 #46b98a;
+    color: white;
+}
+.button.green:hover {
+    background: none repeat scroll 0 0 #444444;
+    color: white;
+}
+.button.blue {
+    background: none repeat scroll 0 0 #2db6cf;
+    color: white;
+}
+.button.blue:hover {
+    background: none repeat scroll 0 0 #444444;
+    color: white;
+}
+
+.slide{
+    background-repeat: no-repeat;
+    background-position: right top;
+}
+
+.slide .slide-content .info {
+    position: absolute;
+    z-index: 3000;
+}
+
+#slides-wrapper .slides .slide .slide-content .info .title {
+    display: block;
+    margin-top: 0px;
+}
+
+.scrollup{
+    width:40px;
+    height:40px;
+    opacity:0.3;
+    position:fixed;
+    bottom:50px;
+    right:100px;
+    display:none;
+    text-indent:-9999px;
+    background: url('icon_top.png') no-repeat;
+}
+
+#accordion-container {
+    font-size: 13px;
+    background: #ffffff;
+    padding: 5px 10px 10px 10px;
+    border: 1px solid #cccccc;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 0 5px 15px #cccccc;
+    -webkit-box-shadow: 0 5px 15px #cccccc;
+    box-shadow: 0 5px 15px #cccccc;
+}
+
+.accordion-header {
+    font-size: 16px;
+    background: #ebebeb;
+    margin: 5px 0 0 0;
+    padding: 5px 20px;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+    color: #666666;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.active-header {
+    -moz-border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+    border-radius: 5px 5px 0 0;
+    background: url('active-header.gif') #cef98d;
+    background-repeat: no-repeat;
+    background-position: right 50%;
+}
+
+.active-header:hover {
+    background: url('active-header.gif') #c6f089;
+    background-repeat: no-repeat;
+    background-position: right 50%;
+}
+
+.inactive-header {
+    background: url('inactive-header.gif') #ebebeb;
+    background-repeat: no-repeat;
+    background-position: right 50%;
+}
+
+.inactive-header:hover {
+    background: url('inactive-header.gif') #f5f5f5;
+    background-repeat: no-repeat;
+    background-position: right 50%;
+}
+
+.accordion-content {
+    display: none;
+    padding: 20px;
+    background: #ffffff;
+    border: 1px solid #cccccc;
+    border-top: 0;
+    -moz-border-radius: 0 0 5px 5px;
+    -webkit-border-radius: 0 0 5px 5px;
+    border-radius: 0 0 5px 5px;
+}
+
+/* CSS3 EFFECTS */
+
+/* THIRD EFFECTS */
+
+.third-effect .mask {
+    opacity: 0;
+    overflow:visible;
+    border:100px solid rgba(0,0,0,0.7);
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+.third-effect a.info {
+    position:relative;
+    top:-10px;
+    opacity: 0;
+    -webkit-transition: opacity 0.5s 0s ease-in-out;
+    -moz-transition: opacity 0.5s 0s ease-in-out;
+    -o-transition: opacity 0.5s 0s ease-in-out;
+    -ms-transition: opacity 0.5s 0s ease-in-out;
+    transition: opacity 0.5s 0s ease-in-out;
+}
+.third-effect:hover .mask {
+    opacity: 1;
+    border:100px solid rgba(0,0,0,0.8);
+}
+.third-effect:hover a.info {
+    opacity:1;
+    -moz-transition-delay: 0.3s;
+    -webkit-transition-delay: 0.3s;
+    -o-transition-delay: 0.3s;
+    -ms-transition-delay: 0.3s;
+    transition-delay: 0.3s;
+}
+
+
+.view {
+    width: 300px;
+    height: 190px;
+    margin: 10px;
+    float: left;
+    border: 3px solid #fff;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    box-shadow: 0px 0px 5px #aaa;
+    cursor: default;
+}
+
+.view .mask, .view .content {
+    width: 300px;
+    height: 200px;
+    position: absolute;
+
+    top: 0;
+    left: 0;
+}
+
+.view img {
+    display: block;
+    position: relative;
+}
+
+.view a.info {
+    background: url(<%= asset_path 'link.png' %>) center no-repeat;
+    display: inline-block;
+    text-decoration: none;
+    padding:0;
+    text-indent:-9999px;
+    width:20px;
+    height:20px;
 }

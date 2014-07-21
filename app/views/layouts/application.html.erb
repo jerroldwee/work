@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Figo Eyewear</title>
+  <%= favicon_link_tag 'favicon1.ico' %>
+  <title><%= @pagetitle || "Figo Eyewear"%></title>
   <meta name="viewport" content="width = device-width, initial-scale = 1, user-scalable = no, minimum-scale = 1, maximum-scale = 1, target-densityDpi=160dpi"/>
   <!-- width=device-width causes the iPhone 5 to letterbox the app, so we want to exclude it for iPhone 5 to allow full screen apps -->
   <meta name="viewport" id="vp" content="initial-scale=1.0,user-scalable=no,maximum-scale=1" media="(device-height: 568px)" />
@@ -15,7 +16,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<a href="#" class="scrollup">Scroll</a>
 <div class="layout <%= @with_bg %>">
   <div class="content">
     <% unless @comingsoon %>
@@ -187,6 +188,25 @@
 </div>
 
 <% end %>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $(window).scroll(function(){
+            if ($(this).scrollTop() > 100) {
+                $('.scrollup').fadeIn();
+            } else {
+                $('.scrollup').fadeOut();
+            }
+        });
+
+        $('.scrollup').click(function(){
+            $("html, body").animate({ scrollTop: 0 }, 600);
+            return false;
+        });
+
+    });
+</script>
 
 </body>
 </html>

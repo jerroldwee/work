@@ -13,10 +13,12 @@ class PagesController < ApplicationController
 
   def faq
     @faq = 'active'
+    @pagetitle = 'Figoeyewear-FAQ'
   end
 
   def philosophy
     @philosophy = 'active'
+    @pagetitle = 'Figoeyewear-Philosphy'
   end
 
   def returns
@@ -25,14 +27,17 @@ class PagesController < ApplicationController
 
   def privacy
     @privacy = 'active'
+    @pagetitle = 'Figoeyewear-Privacy'
   end
 
   def terms
     @terms = 'active'
+    @pagetitle = 'Figoeyewear-Terms and Condition'
   end
 
   def referral
     @referral = 'active'
+    @pagetitle = 'Figoeyewear-Referral'
   end
 
   def contactus
@@ -44,16 +49,18 @@ class PagesController < ApplicationController
     @alternative = "white"
 
     @about_us_page = true
-
+    @pagetitle = 'Figoeyewear-AboutUs'
     # render :layout => "application-about"
   end
 
   def apps
-    @apps = 'active'   
+    @apps = 'active'
+    @pagetitle = 'Figoeyewear-MobileApplication'
   end
 
   def contest
     @contest = 'active'
+    @pagetitle = 'Figoeyewear-contest'
   end
   # def welcome
   #   hash = { :data => rand(100) }

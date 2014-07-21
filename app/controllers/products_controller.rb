@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  layout 'application-product'
+
   def index
     @products = Product.paginate(:page => params[:page])
   end
@@ -35,13 +37,21 @@ class ProductsController < ApplicationController
     render :action => :index
   end
 
+  def test
+    @for_unisex = true
+    @products = Product.where("gender = ?", "Unisex").paginate(:page => params[:page])
+    filter_list("Unisex")
+
+    render :action => :index
+  end
+
   def show 
     @product = Product.find(params[:id])
   end
 
   def source
     source = Product
-
+    source = source.where("brand IN (?)", params[:brand]) unless params[:brand].blank?
     source = source.where("material_id IN (?)", params[:material].map{|m|m.to_i} + [0])  unless params[:material].blank?
     source = source.where("frame_width_id IN (?)", params[:frame_width].map{|m|m.to_i} + [0])  unless params[:frame_width].blank?
     source = source.where("frame_shape_id IN (?)", params[:frame_shape].map{|m|m.to_i} + [0])  unless params[:frame_shape].blank?

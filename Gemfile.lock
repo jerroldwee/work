@@ -1,22 +1,3 @@
-GIT
-  remote: git://github.com/thoughtbot/paperclip.git
-  revision: 6459f2c00f16051ec397fe911bc21078291ce3b8
-  specs:
-    paperclip (3.5.2)
-      activemodel (>= 3.0.0)
-      activesupport (>= 3.0.0)
-      cocaine (~> 0.5.3)
-      mime-types
-
-GIT
-  remote: git@github.com:chardy/paypal-payment.git
-  revision: f852d01663173c286fdd392939ad37c70f4e42fb
-  tag: v0.1.2
-  specs:
-    paypal-payment (0.1.2)
-      curb
-      multi_json
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -44,13 +25,17 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
-    arel (4.0.1)
-    atomic (1.1.14)
-    bcrypt-ruby (3.1.2)
+    arel (4.0.2)
+    bcrypt (3.1.7)
+    bcrypt (3.1.7-x86-mingw32)
+    bcrypt-ruby (3.1.5)
+      bcrypt (>= 3.1.3)
+    bcrypt-ruby (3.1.5-x86-mingw32)
+      bcrypt (>= 3.1.3)
     builder (3.1.4)
     climate_control (0.0.3)
       activesupport (>= 3.0)
-    cocaine (0.5.3)
+    cocaine (0.5.4)
       climate_control (>= 0.0.3, < 1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -58,53 +43,72 @@ GEM
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.6.3)
-    country_select (1.2.0)
+    coffee-script-source (1.7.0)
+    countries (0.9.3)
+      currencies (~> 0.4.2)
+    country_select (1.3.1)
+      countries (= 0.9.3)
     curb (0.8.5)
+    currencies (0.4.2)
     daemons (1.1.9)
     erubis (2.7.0)
     eventmachine (1.0.3)
-    execjs (2.0.2)
-    faraday (0.8.8)
-      multipart-post (~> 1.2.0)
-    hashie (2.0.5)
+    eventmachine (1.0.3-x86-mingw32)
+    execjs (2.2.0)
+    faraday (0.9.0)
+      multipart-post (>= 1.2, < 3)
+    hashie (2.1.2)
     hike (1.2.3)
-    httpauth (0.2.0)
+    httpauth (0.2.1)
     i18n (0.6.9)
-    jquery-rails (3.0.4)
+    jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.1)
-    jwt (0.1.8)
+    jwt (0.1.13)
       multi_json (>= 1.5)
-    kgio (2.8.1)
     libv8 (3.16.14.3)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mail_form (1.5.0)
+      actionmailer (>= 3.2, < 5)
+      activemodel (>= 3.2, < 5)
     mime-types (1.25.1)
     mini_magick (3.7.0)
       subexec (~> 0.2.1)
     minitest (4.7.5)
-    multi_json (1.8.2)
-    multipart-post (1.2.0)
-    mysql2 (0.3.14)
-    non-stupid-digest-assets (1.0.1)
+    money (6.1.1)
+      i18n (~> 0.6.4)
+    multi_json (1.10.1)
+    multipart-post (2.0.0)
+    mysql2 (0.3.16)
+    non-stupid-digest-assets (1.0.4)
     oauth2 (0.8.1)
       faraday (~> 0.8)
       httpauth (~> 0.1)
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
-    omniauth (1.1.4)
+    omniauth (1.2.1)
       hashie (>= 1.2, < 3)
-      rack
+      rack (~> 1.0)
     omniauth-facebook (1.4.0)
       omniauth-oauth2 (~> 1.0.2)
     omniauth-oauth2 (1.0.3)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
-    polyglot (0.3.3)
+    paperclip (4.1.1)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
+    paypal (2.0.0)
+      money (> 0.0.0)
+    paypal-payment (0.1.2)
+      curb
+      multi_json
+    polyglot (0.3.5)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -121,20 +125,23 @@ GEM
       activesupport (= 4.0.1)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    raindrops (0.12.0)
-    rake (10.1.0)
-    rdoc (3.12.2)
+    rake (10.3.2)
+    rdoc (4.1.1)
       json (~> 1.4)
     ref (1.0.5)
-    sass (3.2.12)
-    sass-rails (4.0.1)
+    sass (3.2.19)
+    sass-rails (4.0.3)
       railties (>= 4.0.0, < 5.0)
-      sass (>= 3.1.10)
-      sprockets-rails (~> 2.0.0)
-    sdoc (0.3.20)
-      json (>= 1.1.3)
-      rdoc (~> 3.10)
-    sprockets (2.10.1)
+      sass (~> 3.2.0)
+      sprockets (~> 2.8, <= 2.11.0)
+      sprockets-rails (~> 2.0)
+    sdoc (0.4.0)
+      json (~> 1.8)
+      rdoc (~> 4.0, < 5.0)
+    simple_form (3.0.2)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
+    sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
@@ -144,51 +151,49 @@ GEM
       activesupport (>= 3.0)
       sprockets (~> 2.8)
     subexec (0.2.3)
-    therubyracer (0.12.0)
+    therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
-    thin (1.5.1)
+    thin (1.6.2)
       daemons (>= 1.0.9)
-      eventmachine (>= 0.12.6)
+      eventmachine (>= 1.0.0)
       rack (>= 1.0.0)
-    thor (0.18.1)
-    thread_safe (0.1.3)
-      atomic
+    thor (0.19.1)
+    thread_safe (0.3.4)
     tilt (1.4.1)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (2.0.0)
+    turbolinks (2.2.2)
       coffee-rails
-    tzinfo (0.3.38)
-    uglifier (2.3.3)
+    tzinfo (0.3.39)
+    uglifier (2.5.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    unicorn (4.7.0)
-      kgio (~> 2.6)
-      rack
-      raindrops (~> 0.7)
     will_paginate (3.0.5)
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
   bcrypt-ruby
   country_select
   jquery-rails
+  mail_form
   mini_magick
   mysql2
   non-stupid-digest-assets
   omniauth-facebook (= 1.4.0)
-  paperclip!
-  paypal-payment!
+  paperclip
+  paypal
+  paypal-payment
   rails (= 4.0.1)
   sass-rails (~> 4.0.0)
   sdoc
+  simple_form
   therubyracer
   thin
   turbolinks
   uglifier (>= 1.3.0)
-  unicorn
   will_paginate (~> 3.0)

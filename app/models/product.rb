@@ -1,4 +1,7 @@
 class Product < ActiveRecord::Base
+
+
+
   has_many :choices
   has_many :product_images, :through => :choices
   has_many :fit_room_images
@@ -12,8 +15,11 @@ class Product < ActiveRecord::Base
   before_destroy :ensure_not_referenced_by_any_line_item
 
   self.per_page = 15
-  
-  has_attached_file :upload, :styles => { 
+
+
+
+  has_attached_file :upload, :styles => {
+
     :large => "860x400>", 
     :medium => "430x200>",
     :small => "215x100>" 
@@ -35,6 +41,8 @@ class Product < ActiveRecord::Base
     material = Material.where("id = ?", self.material_id).first
     material ? material.name : ""
   end
+
+
 
   def frame_width_name
     frame_width = FrameWidth.where("id = ?", self.frame_width_id).first

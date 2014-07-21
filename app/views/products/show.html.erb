@@ -154,17 +154,36 @@
         </ul>
         <input type='hidden' name='product_id' value="<%= @product.id %>"/>
       </div>
-
       <hr>
-      <table class="cart-info">
+      <div>
+        <p><b>Select Your Country</b></p>
+        </div>
+      <br>
+        <select id="country">
+          <option value=""> -- Please select -- </option>
+          <option value="Singapore">Singapore</option>
+          <option value="Malaysia">Malaysia</option>
+        </select>
+
+      </div>
+
+      <div id="message"  class="color-title" style="display:none">
+        <p>Due to legal reasons, the sales of prescription glasses are not allowed in Singapore</p>
+      </div>
+
+<div id="moreinfo" style="display:none">
+      <hr>
+      <table  id="cart-info" class="cart-info">
         <% Lens.order("price ASC").all.each_with_index do |lens, i| %>
-        <% @total += i == 1 ? lens.price : 0 %>
+        <% @total += i == 0 ? lens.price : 0 %>
         <tr>
-          <td class="title"><input class="lens-radio" jsclass="lens-radio" price="<%= lens.price %>" type="radio" value="<%= lens.id %>" <%= i == 1 ? 'checked="checked"' : '' %> name="lens_id"> <%= lens.name %></td>
+          <td class="title"><input class="lens-radio" jsclass="lens-radio" price="<%= lens.price %>" type="radio" value="<%= lens.id %>" <%= i == 0 ? 'checked="checked"' : '' %> name="lens_id"> <%= lens.name %></td>
           <td class="price">$ <%= "%.2f" % lens.price %></td>
         </tr>
         <% end %>
       </table>
+
+</div>
       <hr>
       <table class="cart-info">
         <tr class="header">
@@ -172,11 +191,12 @@
           <td class="price total total-price">$ <%= "%.2f" % @total %></td>
         </tr>
       </table>
+
       <hr>
       <div class="add to cart">
         <button class="add-to-cart-button" style="cursor : pointer">Add to Cart</button>
       </div>
-    </div>
+
   </form>
 
   <div class="grid-auto container">
@@ -199,3 +219,20 @@
 
 </div>
 
+<script>
+    $("#country").change(function () {
+        var selected_country = this.value;
+        if (selected_country == "Singapore"){
+
+
+            $("#moreinfo").hide();
+            $("#message").show();
+        }
+        else{
+
+            $("#moreinfo").show();
+            $("#message").hide();
+        }
+    });
+
+</script>

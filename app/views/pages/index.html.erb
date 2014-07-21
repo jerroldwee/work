@@ -9,29 +9,65 @@
     <ul class="browse">
       <li><a href="/products/men">Shop Men</a></li>
       <li><a href="/products/women">Shop Women</a></li>
+      <li><a href="/brand">branded goods</a></li>
+
     </ul>
   </div>
 </div>
 
 <div class="grid-auto highlight">
-  <div class="unit-1-3">
-    <div class="boxy">
+
+
+    <div class="unit-1-3">
+      <div class="view third-effect">
       <%= image_tag("highlight_spec.jpg") %>
-      <h4><%= link_to "Browse our collections", products_path %></h4>
+<h4>
+
+  <a href="#" style="position: absolute; left: 95px; bottom: 5px;">Our Collection</a>
+</h4>
+
+
+
+    <div class="mask">
+      <a href="<%=products_path%>" class="info">View Our Products</a>
+      <p style="color: white;">Click here for more information</p>
     </div>
+
+      </div>
   </div>
+
   <div class="unit-1-3">
-    <div class="boxy">
+    <div class="view third-effect">
       <%= image_tag("highlight_collection.jpg") %>
-      <h4><%= link_to "Virtual Try On", visual_try_on_users_path %></h4>
+
+      <h4>hi</h4>
+
+
+      <div class="mask">
+        <a href="<%=visual_try_on_users_path%>" class="info">View Our Products</a>
+        <p>Click here for more information</p>
+      </div>
+
     </div>
   </div>
+
   <div class="unit-1-3">
-    <div class="boxy">
+    <div class="view third-effect">
       <%= image_tag("highlight_location.jpg") %>
-      <h4><%= link_to "Find Location NEAR You", "/contactus" %></h4>
+
+      <h4><%= link_to "Browse our collections", products_path %></h4>
+
+
+      <div class="mask">
+        <a href="/contactus" class="info">View Our Products</a>
+        <p>Click here for more information</p>
+      </div>
+
     </div>
   </div>
+
+
+
 </div>
 
 <div class="grid-auto banner">
